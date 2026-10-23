@@ -28,7 +28,6 @@ const ROWS: Record<ThemeId, Row[]> = {
     ['dress', 'puff', 'Váy tay phồng', '#ffc7a8', { pattern: 'flowers' }],
     ['dress', 'aodai', 'Áo dài hồng', '#ff8fb8', { pattern: 'flowers' }],
     ['lips', 'gloss', 'Son bóng hồng', '#ff6fa5'],
-    ['lips', 'heart', 'Son trái tim', '#e8456e'],
     ['blush', 'hearts', 'Má hồng trái tim', '#ff7fa8'],
     ['eyeshadow', 'shimmer', 'Phấn mắt tím lấp lánh', '#b57edc'],
     ['sticker', 'star', 'Hình dán ngôi sao', '#ffd447'],
@@ -89,12 +88,11 @@ const ROWS: Record<ThemeId, Row[]> = {
     ['dress', 'ballgown', 'Đầm kẹo bông', '#c4a4ff', { pattern: 'hearts' }],
     ['dress', 'puff', 'Váy tay phồng xanh', '#8fd8ff', { pattern: 'dots' }],
     ['dress', 'tiered', 'Váy cầu vồng', '#ffb27f', { pattern: 'stripes' }],
-    ['lips', 'heart', 'Son tim tím', '#b06ae0'],
     ['blush', 'round', 'Má hồng kẹo', '#ff8fc0'],
     ['blush', 'hearts', 'Má trái tim xanh', '#6cc8f5'],
     ['eyeshadow', 'shimmer', 'Phấn mắt xanh lấp lánh', '#6cc8f5'],
     ['sticker', 'rainbow', 'Vẽ mặt cầu vồng', '#ff6b6b'],
-    ['sticker', 'butterfly', 'Vẽ mặt bướm', '#c06ce0'],
+    ['lips', 'gloss', 'Son bóng tím', '#b06ae0'],
   ],
 }
 

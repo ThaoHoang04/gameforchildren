@@ -424,15 +424,12 @@ function layersFor(item: Item): Layer[] {
       ]
     }
     case 'lips': {
-      const lips =
-        item.shape === 'heart' ? (
-          <path d={heartPath(100, 121, 0.55)} fill={c} stroke={darken(c, 0.3)} strokeWidth="1.5" />
-        ) : (
-          <>
-            <path d="M90 124 Q100 138 110 124 Q105 128 100 126 Q95 128 90 124 Z" fill={c} stroke={darken(c, 0.3)} strokeWidth="1.5" strokeLinejoin="round" />
-            <ellipse cx="104" cy="130" rx="3" ry="1.6" fill="#fff" fillOpacity=".85" />
-          </>
-        )
+      const lips = (
+        <>
+          <path d="M90 124 Q100 138 110 124 Q105 128 100 126 Q95 128 90 124 Z" fill={c} stroke={darken(c, 0.3)} strokeWidth="1.5" strokeLinejoin="round" />
+          <ellipse cx="104" cy="130" rx="3" ry="1.6" fill="#fff" fillOpacity=".85" />
+        </>
+      )
       return [[7.5, <g key="l">{lips}</g>]]
     }
     case 'blush': {
@@ -473,13 +470,6 @@ function layersFor(item: Item): Layer[] {
             <path d="M44 140 Q58 120 72 140" stroke="#ff6b6b" />
             <path d="M48 140 Q58 126 68 140" stroke="#ffd447" />
             <path d="M52 140 Q58 132 64 140" stroke="#6cc8f5" />
-          </g>
-        ),
-        butterfly: (
-          <g>
-            <ellipse cx="139" cy="130" rx="7" ry="9" fill={c} fillOpacity=".85" transform="rotate(-25 139 130)" />
-            <ellipse cx="153" cy="130" rx="7" ry="9" fill={c} fillOpacity=".85" transform="rotate(25 153 130)" />
-            <ellipse cx="146" cy="132" rx="2" ry="7" fill={edge} />
           </g>
         ),
       }
