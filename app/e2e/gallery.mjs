@@ -4,7 +4,7 @@ import { chromium } from '@playwright/test'
 
 const out = process.argv[2]
 const b = await chromium.launch({ channel: 'msedge' })
-const p = await b.newPage({ viewport: { width: 1200, height: 800 }, reducedMotion: 'reduce' })
+const p = await b.newPage({ viewport: { width: 1200, height: 800 }, deviceScaleFactor: 2, reducedMotion: 'reduce' })
 await p.goto('http://localhost:4173')
 
 // Read the item list from the running app's bundle-free source of truth: the save parser keeps known ids only.
@@ -30,7 +30,7 @@ for (const [theme, outfit] of looks) {
   const worn = await p.evaluate(() => JSON.parse(localStorage.getItem('be-dien-xinh-save')).outfits)
   const missing = Object.values(outfit).filter((id) => !Object.values(worn[theme]).includes(id))
   if (missing.length) console.log('UNKNOWN ids (dropped by save parser):', missing)
-  await p.locator('.stage').screenshot({ path: `${out}/look${++n}.png` })
+  await p.locator('.doll-wrap').screenshot({ path: `${out}/look${++n}.png` })
 }
 
 await p.getByTestId('tab-makeup').click()

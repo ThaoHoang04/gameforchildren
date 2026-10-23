@@ -8,3 +8,4 @@ assets-raw/*
 *.docx
 app/test-results/
 app/playwright-report/
+screenshots/*.png

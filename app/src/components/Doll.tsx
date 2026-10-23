@@ -208,7 +208,7 @@ function dressParts(shape: string, c: string, fill: string, line: string): Dress
             <line x1="76" y1="152" x2="60" y2="204" stroke={c} strokeWidth="11" strokeLinecap="round" />
             <line x1="124" y1="152" x2="140" y2="204" stroke={c} strokeWidth="11" strokeLinecap="round" />
             <path d={front} fill={fill} {...stroke} />
-            <rect x="89" y="130" width="22" height="12" rx="4" fill={fill} {...stroke} />
+            <rect x="90" y="144" width="20" height="9" rx="4" fill={fill} {...stroke} />
             <path d="M100 144 Q112 150 124 148" stroke={line} strokeWidth="1.6" fill="none" />
           </>
         ),
@@ -426,11 +426,11 @@ function layersFor(item: Item): Layer[] {
     case 'lips': {
       const lips =
         item.shape === 'heart' ? (
-          <path d={heartPath(100, 130, 0.75)} fill={c} stroke={darken(c, 0.3)} strokeWidth="1.5" />
+          <path d={heartPath(100, 121, 0.55)} fill={c} stroke={darken(c, 0.3)} strokeWidth="1.5" />
         ) : (
           <>
-            <path d="M89 127 Q100 142 111 127 Q105 131 100 129 Q95 131 89 127 Z" fill={c} stroke={darken(c, 0.3)} strokeWidth="1.5" strokeLinejoin="round" />
-            <ellipse cx="104" cy="133" rx="3" ry="1.6" fill="#fff" fillOpacity=".85" />
+            <path d="M90 124 Q100 138 110 124 Q105 128 100 126 Q95 128 90 124 Z" fill={c} stroke={darken(c, 0.3)} strokeWidth="1.5" strokeLinejoin="round" />
+            <ellipse cx="104" cy="130" rx="3" ry="1.6" fill="#fff" fillOpacity=".85" />
           </>
         )
       return [[7.5, <g key="l">{lips}</g>]]
@@ -438,8 +438,8 @@ function layersFor(item: Item): Layer[] {
     case 'blush': {
       const cheeks =
         item.shape === 'hearts'
-          ? [58, 142].map((x) => <path key={x} d={heartPath(x, 120, 0.85)} fill={c} fillOpacity=".75" />)
-          : [58, 142].map((x) => <ellipse key={x} cx={x} cy="121" rx="15" ry="9" fill={c} fillOpacity=".55" />)
+          ? [60, 140].map((x) => <path key={x} d={heartPath(x, 114, 0.85)} fill={c} fillOpacity=".75" />)
+          : [60, 140].map((x) => <ellipse key={x} cx={x} cy="116" rx="14" ry="8.5" fill={c} fillOpacity=".55" />)
       return [[7.5, <g key="bl">{cheeks}</g>]]
     }
     case 'eyeshadow':
@@ -450,7 +450,7 @@ function layersFor(item: Item): Layer[] {
           <g key="es">
             {[76, 124].map((x) => (
               <g key={x}>
-                <path d={`M${x - 17} 96 Q${x} 66 ${x + 17} 96 L${x + 14} 96 Q${x} 82 ${x - 14} 96 Z`} fill={c} fillOpacity={item.shape === 'soft' ? 0.6 : 0.8} />
+                <path d={`M${x - 13} 94 Q${x} 74 ${x + 13} 94 L${x + 10} 95 Q${x} 82 ${x - 10} 95 Z`} fill={c} fillOpacity={item.shape === 'soft' ? 0.6 : 0.8} />
                 {item.shape === 'shimmer' && (
                   <>
                     <path d={sparkle(x - 8, 82, 3.5)} fill="#fff" />
@@ -517,7 +517,36 @@ function layersFor(item: Item): Layer[] {
 
 function BodyLayers({ skin, id }: { skin: string; id: string }): Layer[] {
   const gid = `skin-${id}`
-  const edge = darken(skin.startsWith('#') ? skin : '#f6cfb0', 0.3)
+  const g = `url(#${gid})`
+  const edge = darken(skin.startsWith('#') ? skin : '#f6cfb0', 0.32)
+  const shade = darken(skin.startsWith('#') ? skin : '#f6cfb0', 0.1)
+  const arm = (side: 1 | -1) => {
+    // Slightly bent arm: shoulder -> elbow -> wrist, with a small hand.
+    const x = (v: number) => 100 + side * v
+    const d = `M${x(24)} 150 Q${x(38)} 172 ${x(36)} 200`
+    return (
+      <g key={side}>
+        <path d={d} stroke={edge} strokeWidth="15" strokeLinecap="round" fill="none" />
+        <path d={d} stroke={g} strokeWidth="11" strokeLinecap="round" fill="none" />
+        {/* hand + thumb */}
+        <ellipse cx={x(36)} cy="208" rx="7.5" ry="8.5" fill={g} stroke={edge} strokeWidth="2" />
+        <ellipse cx={x(30)} cy="206" rx="3" ry="4.5" fill={g} stroke={edge} strokeWidth="1.6" transform={`rotate(${side * 20} ${x(30)} 206)`} />
+        <path d={`M${x(34)} 213 L${x(34)} 216 M${x(38)} 213 L${x(38.5)} 216`} stroke={edge} strokeWidth="1.2" strokeLinecap="round" />
+      </g>
+    )
+  }
+  const leg = (side: 1 | -1) => {
+    const x = (v: number) => 100 + side * v
+    // Tapered leg: thigh -> knee -> calf -> ankle, plus a bare foot (shoes cover it).
+    const d = `M${x(3)} 206 L${x(19)} 206 Q${x(20)} 232 ${x(17)} 262 L${x(5)} 262 Q${x(2)} 232 ${x(3)} 206 Z`
+    return (
+      <g key={side}>
+        <path d={d} fill={g} stroke={edge} strokeWidth="2" strokeLinejoin="round" />
+        <ellipse cx={x(11)} cy="236" rx="5" ry="3" fill={shade} opacity=".5" />
+        <path d={`M${x(3)} 266 Q${x(10)} 258 ${x(18)} 264 Q${x(24)} 270 ${x(20)} 274 L${x(4)} 274 Q${x(1)} 270 ${x(3)} 266 Z`} fill={g} stroke={edge} strokeWidth="2" strokeLinejoin="round" />
+      </g>
+    )
+  }
   return [
     [-1, <ellipse key="shadow" cx="100" cy="284" rx="66" ry="10" fill="rgba(90,50,110,.18)" />],
     [
@@ -525,52 +554,49 @@ function BodyLayers({ skin, id }: { skin: string; id: string }): Layer[] {
       <g key="body">
         <defs>
           <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor={lighten(skin, 0.25)} />
+            <stop offset="0" stopColor={lighten(skin, 0.22)} />
             <stop offset="1" stopColor={skin} />
           </linearGradient>
         </defs>
-        {/* legs */}
-        <rect x="82" y="206" width="16" height="62" rx="8" fill={`url(#${gid})`} stroke={edge} strokeWidth="2" />
-        <rect x="102" y="206" width="16" height="62" rx="8" fill={`url(#${gid})`} stroke={edge} strokeWidth="2" />
-        {/* arms and hands */}
-        <line x1="76" y1="152" x2="60" y2="204" stroke={edge} strokeWidth="15" strokeLinecap="round" />
-        <line x1="124" y1="152" x2="140" y2="204" stroke={edge} strokeWidth="15" strokeLinecap="round" />
-        <line x1="76" y1="152" x2="60" y2="204" stroke={`url(#${gid})`} strokeWidth="11" strokeLinecap="round" />
-        <line x1="124" y1="152" x2="140" y2="204" stroke={`url(#${gid})`} strokeWidth="11" strokeLinecap="round" />
-        {/* torso + neck */}
-        <rect x="90" y="132" width="20" height="22" fill={skin} />
-        <path d="M76 144 Q100 138 124 144 L126 214 L74 214 Z" fill={`url(#${gid})`} stroke={edge} strokeWidth="2" strokeLinejoin="round" />
+        {leg(-1)}
+        {leg(1)}
+        {arm(-1)}
+        {arm(1)}
+        {/* neck + torso with a gentle waist */}
+        <path d="M91 128 L109 128 L110 152 L90 152 Z" fill={g} stroke={edge} strokeWidth="1.8" />
+        <path d="M78 146 Q100 139 122 146 Q127 180 121 214 Q100 220 79 214 Q73 180 78 146 Z" fill={g} stroke={edge} strokeWidth="2" strokeLinejoin="round" />
         {/* head */}
-        <ellipse cx="100" cy="92" rx="58" ry="54" fill={`url(#${gid})`} stroke={edge} strokeWidth="2.2" />
-        <ellipse cx="44" cy="100" rx="5" ry="8" fill={skin} stroke={edge} strokeWidth="1.5" />
-        <ellipse cx="156" cy="100" rx="5" ry="8" fill={skin} stroke={edge} strokeWidth="1.5" />
+        <ellipse cx="100" cy="92" rx="58" ry="54" fill={g} stroke={edge} strokeWidth="2.2" />
       </g>,
     ],
     [
       7,
       <g key="face">
-        <path d="M60 80 Q70 74 90 78 M110 78 Q130 74 140 80" stroke="#7a4a3a" strokeWidth="3" fill="none" strokeLinecap="round" />
+        {/* brows: thin, soft arches */}
+        <path d="M65 83 Q76 76 88 80 M112 80 Q124 76 135 83" stroke="#8a5a44" strokeWidth="2.6" fill="none" strokeLinecap="round" />
         {[76, 124].map((x) => (
           <g key={x}>
-            <ellipse cx={x} cy="102" rx="13" ry="16" fill="#3a2250" />
-            <ellipse cx={x} cy="106" rx="11" ry="12" fill="#7c4fb5" />
-            <ellipse cx={x} cy="108" rx="7" ry="8" fill="#2b1838" />
-            <circle cx={x + 4} cy="96" r="5" fill="#fff" />
-            <circle cx={x - 4} cy="110" r="2.4" fill="#fff" />
+            <ellipse cx={x} cy="101" rx="9.5" ry="11.5" fill="#4a2f3f" />
+            <ellipse cx={x} cy="104" rx="7" ry="8" fill="#7a4a5a" opacity=".55" />
+            <circle cx={x + 3.5} cy="96" r="4" fill="#fff" />
+            <circle cx={x - 3} cy="107" r="1.8" fill="#fff" />
+            {/* single soft lash line with a small flick on the outer corner */}
             <path
-              d={`M${x - 14} 96 Q${x} 82 ${x + 14} 96`}
-              stroke="#2b1838"
-              strokeWidth="3.4"
+              d={x < 100 ? `M${x - 11} 97 Q${x - 5} 88 ${x + 4} 89 M${x - 11} 97 l-3 -3` : `M${x + 11} 97 Q${x + 5} 88 ${x - 4} 89 M${x + 11} 97 l3 -3`}
+              stroke="#3a2030"
+              strokeWidth="2.4"
               fill="none"
               strokeLinecap="round"
             />
-            <path d={x < 100 ? `M${x - 13} 94 l-6 -4` : `M${x + 13} 94 l6 -4`} stroke="#2b1838" strokeWidth="3" strokeLinecap="round" />
           </g>
         ))}
-        <path d="M98 118 Q100 121 102 118" stroke="#d98a7a" strokeWidth="2" fill="none" strokeLinecap="round" />
-        <ellipse cx="58" cy="120" rx="10" ry="6" fill="#ff7f9a" opacity=".5" />
-        <ellipse cx="142" cy="120" rx="10" ry="6" fill="#ff7f9a" opacity=".5" />
-        <path d="M91 128 Q100 138 109 128 Q100 132 91 128 Z" fill="#e0607a" stroke="#c4506a" strokeWidth="2" strokeLinejoin="round" />
+        {/* tiny nose + soft cheeks */}
+        <path d="M98 114 Q100 117 102 114" stroke="#d98a7a" strokeWidth="2" fill="none" strokeLinecap="round" />
+        <ellipse cx="60" cy="116" rx="10" ry="6" fill="#ff8fa3" opacity=".32" />
+        <ellipse cx="140" cy="116" rx="10" ry="6" fill="#ff8fa3" opacity=".32" />
+        {/* small friendly smile */}
+        <path d="M91 124 Q100 133 109 124" stroke="#c4506a" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+        <path d="M95 128 Q100 132 105 128" fill="#e8798f" opacity=".7" />
       </g>,
     ],
   ]
