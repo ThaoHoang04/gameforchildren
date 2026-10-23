@@ -14,8 +14,8 @@ const looks = [
   ['princess', { hair: 'princess_hair_pigtails_2', dress: 'princess_dress_tiered_20', head: 'princess_head_bow_13', back: 'princess_back_wings_17', sticker: 'princess_sticker_crown_27' }],
   ['fashion', { hair: 'fashion_hair_ponytail_3', dress: 'fashion_dress_overall_20', shoes: 'fashion_shoes_sneakers_14', lips: 'fashion_lips_gloss_24', blush: 'fashion_blush_round_26', sticker: 'fashion_sticker_heart_28' }],
   ['fashion', { hair: 'fashion_hair_long_2', dress: 'fashion_dress_puff_21', eyeshadow: 'fashion_eyeshadow_soft_27', lips: 'fashion_lips_gloss_25', shoes: 'fashion_shoes_boots_15' }],
-  ['chibi', { hair: 'chibi_hair_bun_2', dress: 'chibi_dress_tutu_18', head: 'chibi_head_bunnyears_13', blush: 'chibi_blush_hearts_24', sticker: 'chibi_sticker_rainbow_26', shoes: 'chibi_shoes_sneakers_10' }],
-  ['chibi', { hair: 'chibi_hair_pigtails_1', dress: 'chibi_dress_tiered_22', head: 'chibi_head_catears_12', eyeshadow: 'chibi_eyeshadow_shimmer_25', blush: 'chibi_blush_round_23', sticker: 'chibi_sticker_rainbow_26', lips: 'chibi_lips_gloss_27' }],
+  ['chibi', { hair: 'chibi_hair_bun_2', dress: 'chibi_dress_tutu_18', head: 'chibi_head_bunnyears_13', blush: 'chibi_blush_hearts_24', shoes: 'chibi_shoes_sneakers_10' }],
+  ['chibi', { hair: 'chibi_hair_pigtails_1', dress: 'chibi_dress_tiered_22', head: 'chibi_head_catears_12', eyeshadow: 'chibi_eyeshadow_shimmer_25', blush: 'chibi_blush_round_23', lips: 'chibi_lips_gloss_26' }],
 ]
 
 let n = 0

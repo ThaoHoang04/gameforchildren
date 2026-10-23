@@ -91,7 +91,6 @@ const ROWS: Record<ThemeId, Row[]> = {
     ['blush', 'round', 'Má hồng kẹo', '#ff8fc0'],
     ['blush', 'hearts', 'Má trái tim xanh', '#6cc8f5'],
     ['eyeshadow', 'shimmer', 'Phấn mắt xanh lấp lánh', '#6cc8f5'],
-    ['sticker', 'rainbow', 'Vẽ mặt cầu vồng', '#ff6b6b'],
     ['lips', 'gloss', 'Son bóng tím', '#b06ae0'],
   ],
 }

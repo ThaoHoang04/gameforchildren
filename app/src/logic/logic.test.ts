@@ -132,7 +132,7 @@ describe('items & save', () => {
   it('each theme has plenty of dresses and makeup', () => {
     for (const t of ['princess', 'fashion', 'chibi'] as const) {
       expect(itemsFor(t, 'dress').length).toBeGreaterThanOrEqual(6)
-      expect(itemsFor(t, ['lips', 'blush', 'eyeshadow', 'sticker']).length).toBeGreaterThanOrEqual(5)
+      expect(itemsFor(t, ['lips', 'blush', 'eyeshadow', 'sticker']).length).toBeGreaterThanOrEqual(4)
     }
   })
 

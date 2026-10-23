@@ -465,13 +465,6 @@ function layersFor(item: Item): Layer[] {
         star: <path d={starPath(146, 134, 9)} fill={c} stroke={edge} strokeWidth="1.5" strokeLinejoin="round" />,
         heart: <path d={heartPath(58, 132, 0.7)} fill={c} stroke={edge} strokeWidth="1.2" />,
         crown: <path d="M136 140 L137 128 L142 133 L146 125 L150 133 L155 128 L156 140 Z" fill={c} stroke={edge} strokeWidth="1.5" strokeLinejoin="round" />,
-        rainbow: (
-          <g fill="none" strokeWidth="3.2" strokeLinecap="round">
-            <path d="M44 140 Q58 120 72 140" stroke="#ff6b6b" />
-            <path d="M48 140 Q58 126 68 140" stroke="#ffd447" />
-            <path d="M52 140 Q58 132 64 140" stroke="#6cc8f5" />
-          </g>
-        ),
       }
       return [[7.6, <g key="st">{m[item.shape] ?? m.star}</g>]]
     }
