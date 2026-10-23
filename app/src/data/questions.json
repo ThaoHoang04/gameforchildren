@@ -1,0 +1,962 @@
+[
+ {
+  "id": "math_001",
+  "subject": "math",
+  "stage": "number_range_5",
+  "type": "multiple_choice",
+  "emoji": "⭐",
+  "prompt": "1 + 1 = ?",
+  "choices": [
+   "2",
+   "1",
+   "3"
+  ],
+  "answer": "2",
+  "hint": "Có một ngôi sao, thêm một ngôi sao nữa.",
+  "explanation": "Một cộng một bằng hai."
+ },
+ {
+  "id": "math_002",
+  "subject": "math",
+  "stage": "number_range_5",
+  "type": "multiple_choice",
+  "emoji": "🍎",
+  "prompt": "2 + 1 = ?",
+  "choices": [
+   "3",
+   "2",
+   "4"
+  ],
+  "answer": "3",
+  "hint": "Có 2 quả táo, thêm 1 quả nữa. Đếm xem nào!",
+  "explanation": "Hai cộng một bằng ba."
+ },
+ {
+  "id": "math_003",
+  "subject": "math",
+  "stage": "number_range_5",
+  "type": "multiple_choice",
+  "emoji": "🎈",
+  "prompt": "2 + 2 = ?",
+  "choices": [
+   "4",
+   "3",
+   "5"
+  ],
+  "answer": "4",
+  "hint": "Giơ 2 ngón tay, giơ thêm 2 ngón nữa rồi đếm.",
+  "explanation": "Hai cộng hai bằng bốn."
+ },
+ {
+  "id": "math_004",
+  "subject": "math",
+  "stage": "number_range_5",
+  "type": "multiple_choice",
+  "emoji": "🐟",
+  "prompt": "3 + 1 = ?",
+  "choices": [
+   "4",
+   "2",
+   "5"
+  ],
+  "answer": "4",
+  "hint": "Đếm tiếp từ 3: ba, bốn.",
+  "explanation": "Ba cộng một bằng bốn."
+ },
+ {
+  "id": "math_005",
+  "subject": "math",
+  "stage": "number_range_5",
+  "type": "multiple_choice",
+  "emoji": "🍪",
+  "prompt": "4 - 1 = ?",
+  "choices": [
+   "3",
+   "5",
+   "4"
+  ],
+  "answer": "3",
+  "hint": "Có 4 cái bánh, bé ăn mất 1 cái. Còn mấy cái?",
+  "explanation": "Bốn trừ một bằng ba."
+ },
+ {
+  "id": "math_006",
+  "subject": "math",
+  "stage": "number_range_5",
+  "type": "multiple_choice",
+  "emoji": "🌸",
+  "prompt": "5 - 2 = ?",
+  "choices": [
+   "3",
+   "2",
+   "4"
+  ],
+  "answer": "3",
+  "hint": "Đếm lùi từ 5: bốn, ba.",
+  "explanation": "Năm trừ hai bằng ba."
+ },
+ {
+  "id": "math_007",
+  "subject": "math",
+  "stage": "number_range_5",
+  "type": "multiple_choice",
+  "emoji": "⭐⭐⭐",
+  "prompt": "Có mấy ngôi sao?",
+  "choices": [
+   "3",
+   "2",
+   "4"
+  ],
+  "answer": "3",
+  "hint": "Chỉ tay vào từng ngôi sao và đếm.",
+  "explanation": "Có ba ngôi sao."
+ },
+ {
+  "id": "math_008",
+  "subject": "math",
+  "stage": "number_range_5",
+  "type": "multiple_choice",
+  "emoji": "🍎🍎🍎🍎",
+  "prompt": "Có mấy quả táo?",
+  "choices": [
+   "4",
+   "3",
+   "5"
+  ],
+  "answer": "4",
+  "hint": "Chỉ tay vào từng quả táo và đếm.",
+  "explanation": "Có bốn quả táo."
+ },
+ {
+  "id": "math_009",
+  "subject": "math",
+  "stage": "number_range_5",
+  "type": "multiple_choice",
+  "emoji": "🧸",
+  "prompt": "3 + 2 = ?",
+  "choices": [
+   "5",
+   "4",
+   "6"
+  ],
+  "answer": "5",
+  "hint": "Giơ 3 ngón tay, thêm 2 ngón nữa.",
+  "explanation": "Ba cộng hai bằng năm."
+ },
+ {
+  "id": "math_010",
+  "subject": "math",
+  "stage": "number_range_5",
+  "type": "multiple_choice",
+  "emoji": "🍬",
+  "prompt": "5 - 5 = ?",
+  "choices": [
+   "0",
+   "1",
+   "5"
+  ],
+  "answer": "0",
+  "hint": "Có 5 viên kẹo, bé ăn hết cả 5 viên. Còn mấy viên?",
+  "explanation": "Năm trừ năm bằng không."
+ },
+ {
+  "id": "math_011",
+  "subject": "math",
+  "stage": "number_range_10",
+  "type": "multiple_choice",
+  "emoji": "🍓",
+  "prompt": "5 + 3 = ?",
+  "choices": [
+   "8",
+   "7",
+   "9"
+  ],
+  "answer": "8",
+  "hint": "Bắt đầu từ 5, đếm tiếp thêm 3 số: sáu, bảy, tám.",
+  "explanation": "Năm cộng ba bằng tám."
+ },
+ {
+  "id": "math_012",
+  "subject": "math",
+  "stage": "number_range_10",
+  "type": "multiple_choice",
+  "emoji": "🦋",
+  "prompt": "7 + 2 = ?",
+  "choices": [
+   "9",
+   "8",
+   "10"
+  ],
+  "answer": "9",
+  "hint": "Từ 7 đếm tiếp 2 số: tám, chín.",
+  "explanation": "Bảy cộng hai bằng chín."
+ },
+ {
+  "id": "math_013",
+  "subject": "math",
+  "stage": "number_range_10",
+  "type": "multiple_choice",
+  "emoji": "🐥",
+  "prompt": "6 + 2 = ?",
+  "choices": [
+   "8",
+   "7",
+   "9"
+  ],
+  "answer": "8",
+  "hint": "Từ 6 đếm tiếp 2 số: bảy, tám.",
+  "explanation": "Sáu cộng hai bằng tám."
+ },
+ {
+  "id": "math_014",
+  "subject": "math",
+  "stage": "number_range_10",
+  "type": "multiple_choice",
+  "emoji": "🍩",
+  "prompt": "9 - 4 = ?",
+  "choices": [
+   "5",
+   "4",
+   "6"
+  ],
+  "answer": "5",
+  "hint": "Từ 9 đếm lùi 4 số: tám, bảy, sáu, năm.",
+  "explanation": "Chín trừ bốn bằng năm."
+ },
+ {
+  "id": "math_015",
+  "subject": "math",
+  "stage": "number_range_10",
+  "type": "multiple_choice",
+  "emoji": "🎀",
+  "prompt": "10 - 6 = ?",
+  "choices": [
+   "4",
+   "3",
+   "5"
+  ],
+  "answer": "4",
+  "hint": "Từ 10 đếm lùi 6 số.",
+  "explanation": "Mười trừ sáu bằng bốn."
+ },
+ {
+  "id": "math_016",
+  "subject": "math",
+  "stage": "number_range_10",
+  "type": "multiple_choice",
+  "emoji": "🔢",
+  "prompt": "Số liền sau của 7 là số nào?",
+  "choices": [
+   "8",
+   "6",
+   "9"
+  ],
+  "answer": "8",
+  "hint": "Số liền sau là số đếm tiếp ngay sau số đó.",
+  "explanation": "Sau bảy là tám."
+ },
+ {
+  "id": "math_017",
+  "subject": "math",
+  "stage": "number_range_10",
+  "type": "multiple_choice",
+  "emoji": "🔢",
+  "prompt": "Số liền trước của 6 là số nào?",
+  "choices": [
+   "5",
+   "7",
+   "4"
+  ],
+  "answer": "5",
+  "hint": "Số liền trước là số đứng ngay trước số đó khi đếm.",
+  "explanation": "Trước sáu là năm."
+ },
+ {
+  "id": "math_018",
+  "subject": "math",
+  "stage": "number_range_10",
+  "type": "multiple_choice",
+  "emoji": "🏆",
+  "prompt": "Số nào lớn nhất: 3, 9, 6?",
+  "choices": [
+   "9",
+   "3",
+   "6"
+  ],
+  "answer": "9",
+  "hint": "Số nào đếm được xa nhất thì lớn nhất.",
+  "explanation": "Chín lớn hơn ba và sáu."
+ },
+ {
+  "id": "math_019",
+  "subject": "math",
+  "stage": "number_range_10",
+  "type": "multiple_choice",
+  "emoji": "🐣",
+  "prompt": "Số nào bé nhất: 4, 2, 8?",
+  "choices": [
+   "2",
+   "4",
+   "8"
+  ],
+  "answer": "2",
+  "hint": "Số nào đếm ra sớm nhất thì bé nhất.",
+  "explanation": "Hai bé hơn bốn và tám."
+ },
+ {
+  "id": "math_020",
+  "subject": "math",
+  "stage": "number_range_10",
+  "type": "multiple_choice",
+  "emoji": "🧩",
+  "prompt": "6 + ? = 10",
+  "choices": [
+   "4",
+   "3",
+   "5"
+  ],
+  "answer": "4",
+  "hint": "Từ 6 đếm tiếp đến 10 cần thêm mấy số?",
+  "explanation": "Sáu cộng bốn bằng mười."
+ },
+ {
+  "id": "math_021",
+  "subject": "math",
+  "stage": "number_range_20",
+  "type": "multiple_choice",
+  "emoji": "🌟",
+  "prompt": "10 + 5 = ?",
+  "choices": [
+   "15",
+   "14",
+   "16"
+  ],
+  "answer": "15",
+  "hint": "Mười và năm là mười lăm.",
+  "explanation": "Mười cộng năm bằng mười lăm."
+ },
+ {
+  "id": "math_022",
+  "subject": "math",
+  "stage": "number_range_20",
+  "type": "multiple_choice",
+  "emoji": "🌷",
+  "prompt": "12 + 4 = ?",
+  "choices": [
+   "16",
+   "15",
+   "17"
+  ],
+  "answer": "16",
+  "hint": "Từ 12 đếm tiếp 4 số: 13, 14, 15, 16.",
+  "explanation": "Mười hai cộng bốn bằng mười sáu."
+ },
+ {
+  "id": "math_023",
+  "subject": "math",
+  "stage": "number_range_20",
+  "type": "multiple_choice",
+  "emoji": "🍭",
+  "prompt": "14 - 2 = ?",
+  "choices": [
+   "12",
+   "11",
+   "13"
+  ],
+  "answer": "12",
+  "hint": "Từ 14 đếm lùi 2 số: 13, 12.",
+  "explanation": "Mười bốn trừ hai bằng mười hai."
+ },
+ {
+  "id": "math_024",
+  "subject": "math",
+  "stage": "number_range_20",
+  "type": "multiple_choice",
+  "emoji": "🎁",
+  "prompt": "15 - 5 = ?",
+  "choices": [
+   "10",
+   "9",
+   "11"
+  ],
+  "answer": "10",
+  "hint": "Bớt 5 đơn vị của 15 thì còn đúng một chục.",
+  "explanation": "Mười lăm trừ năm bằng mười."
+ },
+ {
+  "id": "math_025",
+  "subject": "math",
+  "stage": "number_range_20",
+  "type": "multiple_choice",
+  "emoji": "🎯",
+  "prompt": "10 + 8 = ?",
+  "choices": [
+   "18",
+   "17",
+   "19"
+  ],
+  "answer": "18",
+  "hint": "Mười và tám là mười tám.",
+  "explanation": "Mười cộng tám bằng mười tám."
+ },
+ {
+  "id": "math_026",
+  "subject": "math",
+  "stage": "number_range_20",
+  "type": "multiple_choice",
+  "emoji": "🔢",
+  "prompt": "Số liền sau của 19 là số nào?",
+  "choices": [
+   "20",
+   "18",
+   "21"
+  ],
+  "answer": "20",
+  "hint": "Đếm tiếp sau 19.",
+  "explanation": "Sau mười chín là hai mươi."
+ },
+ {
+  "id": "math_027",
+  "subject": "math",
+  "stage": "number_range_20",
+  "type": "multiple_choice",
+  "emoji": "⚖️",
+  "prompt": "15 ... 12. Điền dấu thích hợp.",
+  "choices": [
+   ">",
+   "<",
+   "="
+  ],
+  "answer": ">",
+  "hint": "15 và 12, số nào đếm được xa hơn?",
+  "explanation": "Mười lăm lớn hơn mười hai nên dùng dấu >."
+ },
+ {
+  "id": "math_028",
+  "subject": "math",
+  "stage": "number_range_20",
+  "type": "multiple_choice",
+  "emoji": "⚖️",
+  "prompt": "13 ... 18. Điền dấu thích hợp.",
+  "choices": [
+   "<",
+   ">",
+   "="
+  ],
+  "answer": "<",
+  "hint": "13 và 18, số nào đếm được xa hơn?",
+  "explanation": "Mười ba bé hơn mười tám nên dùng dấu <."
+ },
+ {
+  "id": "math_029",
+  "subject": "math",
+  "stage": "number_range_20",
+  "type": "multiple_choice",
+  "emoji": "🧩",
+  "prompt": "11 + 9 = ?",
+  "choices": [
+   "20",
+   "19",
+   "21"
+  ],
+  "answer": "20",
+  "hint": "Từ 11 đếm tiếp 9 số, hoặc nhớ 1 + 9 = 10.",
+  "explanation": "Mười một cộng chín bằng hai mươi."
+ },
+ {
+  "id": "math_030",
+  "subject": "math",
+  "stage": "number_range_20",
+  "type": "multiple_choice",
+  "emoji": "🔢",
+  "prompt": "2, 4, 6, ... Số tiếp theo là?",
+  "choices": [
+   "8",
+   "7",
+   "9"
+  ],
+  "answer": "8",
+  "hint": "Các số tăng thêm 2 mỗi lần.",
+  "explanation": "Sáu cộng hai bằng tám."
+ },
+ {
+  "id": "viet_001",
+  "subject": "viet",
+  "stage": "letters",
+  "type": "multiple_choice",
+  "emoji": "🐟",
+  "prompt": "Chữ cái đầu của từ \"cá\" là gì?",
+  "choices": [
+   "c",
+   "b",
+   "d"
+  ],
+  "answer": "c",
+  "hint": "Đọc chậm: cờ - á.",
+  "explanation": "Từ \"cá\" bắt đầu bằng chữ c."
+ },
+ {
+  "id": "viet_002",
+  "subject": "viet",
+  "stage": "letters",
+  "type": "multiple_choice",
+  "emoji": "🐱",
+  "prompt": "Chữ cái đầu của từ \"mèo\" là gì?",
+  "choices": [
+   "m",
+   "n",
+   "t"
+  ],
+  "answer": "m",
+  "hint": "Đọc chậm: mờ - èo.",
+  "explanation": "Từ \"mèo\" bắt đầu bằng chữ m."
+ },
+ {
+  "id": "viet_003",
+  "subject": "viet",
+  "stage": "letters",
+  "type": "multiple_choice",
+  "emoji": "🐔",
+  "prompt": "Chữ cái đầu của từ \"gà\" là gì?",
+  "choices": [
+   "g",
+   "d",
+   "q"
+  ],
+  "answer": "g",
+  "hint": "Đọc chậm: gờ - à.",
+  "explanation": "Từ \"gà\" bắt đầu bằng chữ g."
+ },
+ {
+  "id": "viet_004",
+  "subject": "viet",
+  "stage": "letters",
+  "type": "multiple_choice",
+  "emoji": "🏠",
+  "prompt": "Từ \"nhà\" bắt đầu bằng chữ ghép nào?",
+  "choices": [
+   "nh",
+   "ng",
+   "ch"
+  ],
+  "answer": "nh",
+  "hint": "Đọc chậm: nhờ - à.",
+  "explanation": "Từ \"nhà\" bắt đầu bằng nh."
+ },
+ {
+  "id": "viet_005",
+  "subject": "viet",
+  "stage": "letters",
+  "type": "multiple_choice",
+  "emoji": "🌙",
+  "prompt": "Từ \"trăng\" bắt đầu bằng chữ ghép nào?",
+  "choices": [
+   "tr",
+   "ch",
+   "th"
+  ],
+  "answer": "tr",
+  "hint": "Đọc chậm: trờ - ăng.",
+  "explanation": "Từ \"trăng\" bắt đầu bằng tr."
+ },
+ {
+  "id": "viet_006",
+  "subject": "viet",
+  "stage": "letters",
+  "type": "multiple_choice",
+  "emoji": "🐘",
+  "prompt": "Chữ cái đầu của từ \"voi\" là gì?",
+  "choices": [
+   "v",
+   "r",
+   "x"
+  ],
+  "answer": "v",
+  "hint": "Đọc chậm: vờ - oi.",
+  "explanation": "Từ \"voi\" bắt đầu bằng chữ v."
+ },
+ {
+  "id": "viet_007",
+  "subject": "viet",
+  "stage": "letters",
+  "type": "multiple_choice",
+  "emoji": "🐶",
+  "prompt": "Từ \"chó\" bắt đầu bằng chữ ghép nào?",
+  "choices": [
+   "ch",
+   "tr",
+   "kh"
+  ],
+  "answer": "ch",
+  "hint": "Đọc chậm: chờ - ó.",
+  "explanation": "Từ \"chó\" bắt đầu bằng ch."
+ },
+ {
+  "id": "viet_008",
+  "subject": "viet",
+  "stage": "letters",
+  "type": "multiple_choice",
+  "emoji": "🍎",
+  "prompt": "Chữ cái đầu của từ \"táo\" là gì?",
+  "choices": [
+   "t",
+   "đ",
+   "d"
+  ],
+  "answer": "t",
+  "hint": "Đọc chậm: tờ - áo.",
+  "explanation": "Từ \"táo\" bắt đầu bằng chữ t."
+ },
+ {
+  "id": "viet_009",
+  "subject": "viet",
+  "stage": "letters",
+  "type": "multiple_choice",
+  "emoji": "🐰",
+  "prompt": "Từ \"thỏ\" bắt đầu bằng chữ ghép nào?",
+  "choices": [
+   "th",
+   "tr",
+   "kh"
+  ],
+  "answer": "th",
+  "hint": "Đọc chậm: thờ - ỏ.",
+  "explanation": "Từ \"thỏ\" bắt đầu bằng th."
+ },
+ {
+  "id": "viet_010",
+  "subject": "viet",
+  "stage": "letters",
+  "type": "multiple_choice",
+  "emoji": "⭐",
+  "prompt": "Chữ cái đầu của từ \"sao\" là gì?",
+  "choices": [
+   "s",
+   "x",
+   "c"
+  ],
+  "answer": "s",
+  "hint": "Đọc chậm: sờ - ao.",
+  "explanation": "Từ \"sao\" bắt đầu bằng chữ s."
+ },
+ {
+  "id": "viet_011",
+  "subject": "viet",
+  "stage": "rhymes",
+  "type": "multiple_choice",
+  "emoji": "🪑",
+  "prompt": "Tiếng nào có vần \"an\"?",
+  "choices": [
+   "bàn",
+   "bố",
+   "cá"
+  ],
+  "answer": "bàn",
+  "hint": "Đọc to: b-àn. Nghe thấy \"an\" ở cuối.",
+  "explanation": "Tiếng \"bàn\" có vần an."
+ },
+ {
+  "id": "viet_012",
+  "subject": "viet",
+  "stage": "rhymes",
+  "type": "multiple_choice",
+  "emoji": "🐶",
+  "prompt": "Tiếng nào có vần \"on\"?",
+  "choices": [
+   "con",
+   "bà",
+   "cô"
+  ],
+  "answer": "con",
+  "hint": "Đọc to: c-on. Nghe thấy \"on\" ở cuối.",
+  "explanation": "Tiếng \"con\" có vần on."
+ },
+ {
+  "id": "viet_013",
+  "subject": "viet",
+  "stage": "rhymes",
+  "type": "multiple_choice",
+  "emoji": "⭐",
+  "prompt": "Tiếng nào có vần \"ao\"?",
+  "choices": [
+   "sao",
+   "bé",
+   "đi"
+  ],
+  "answer": "sao",
+  "hint": "Đọc to: s-ao. Nghe thấy \"ao\" ở cuối.",
+  "explanation": "Tiếng \"sao\" có vần ao."
+ },
+ {
+  "id": "viet_014",
+  "subject": "viet",
+  "stage": "rhymes",
+  "type": "multiple_choice",
+  "emoji": "🎋",
+  "prompt": "Tiếng nào có vần \"ia\"?",
+  "choices": [
+   "mía",
+   "mẹ",
+   "mũ"
+  ],
+  "answer": "mía",
+  "hint": "Đọc to: m-ía. Nghe thấy \"ia\" ở cuối.",
+  "explanation": "Tiếng \"mía\" có vần ia."
+ },
+ {
+  "id": "viet_015",
+  "subject": "viet",
+  "stage": "rhymes",
+  "type": "multiple_choice",
+  "emoji": "🌸",
+  "prompt": "Tiếng nào có vần \"oa\"?",
+  "choices": [
+   "hoa",
+   "hồ",
+   "hè"
+  ],
+  "answer": "hoa",
+  "hint": "Đọc to: h-oa. Nghe thấy \"oa\" ở cuối.",
+  "explanation": "Tiếng \"hoa\" có vần oa."
+ },
+ {
+  "id": "viet_016",
+  "subject": "viet",
+  "stage": "rhymes",
+  "type": "multiple_choice",
+  "emoji": "✌️",
+  "prompt": "Tiếng nào có vần \"ai\"?",
+  "choices": [
+   "hai",
+   "hồ",
+   "hè"
+  ],
+  "answer": "hai",
+  "hint": "Đọc to: h-ai. Nghe thấy \"ai\" ở cuối.",
+  "explanation": "Tiếng \"hai\" có vần ai."
+ },
+ {
+  "id": "viet_017",
+  "subject": "viet",
+  "stage": "rhymes",
+  "type": "multiple_choice",
+  "emoji": "✋",
+  "prompt": "Tiếng nào có vần \"ay\"?",
+  "choices": [
+   "tay",
+   "tơ",
+   "tư"
+  ],
+  "answer": "tay",
+  "hint": "Đọc to: t-ay. Nghe thấy \"ay\" ở cuối.",
+  "explanation": "Tiếng \"tay\" có vần ay."
+ },
+ {
+  "id": "viet_018",
+  "subject": "viet",
+  "stage": "rhymes",
+  "type": "multiple_choice",
+  "emoji": "🐱",
+  "prompt": "Tiếng nào có vần \"eo\"?",
+  "choices": [
+   "mèo",
+   "bà",
+   "cá"
+  ],
+  "answer": "mèo",
+  "hint": "Đọc to: m-èo. Nghe thấy \"eo\" ở cuối.",
+  "explanation": "Tiếng \"mèo\" có vần eo."
+ },
+ {
+  "id": "viet_019",
+  "subject": "viet",
+  "stage": "rhymes",
+  "type": "multiple_choice",
+  "emoji": "🍚",
+  "prompt": "Tiếng nào có vần \"ôi\"?",
+  "choices": [
+   "xôi",
+   "bàn",
+   "sao"
+  ],
+  "answer": "xôi",
+  "hint": "Đọc to: x-ôi. Nghe thấy \"ôi\" ở cuối.",
+  "explanation": "Tiếng \"xôi\" có vần ôi."
+ },
+ {
+  "id": "viet_020",
+  "subject": "viet",
+  "stage": "rhymes",
+  "type": "multiple_choice",
+  "emoji": "🐮",
+  "prompt": "Tiếng nào có vần \"ê\"?",
+  "choices": [
+   "bê",
+   "bò",
+   "bà"
+  ],
+  "answer": "bê",
+  "hint": "Đọc to: b-ê. Nghe thấy \"ê\" ở cuối.",
+  "explanation": "Tiếng \"bê\" có vần ê."
+ },
+ {
+  "id": "viet_021",
+  "subject": "viet",
+  "stage": "words",
+  "type": "multiple_choice",
+  "emoji": "🐶",
+  "prompt": "Từ nào chỉ con vật?",
+  "choices": [
+   "chó",
+   "bàn",
+   "ghế"
+  ],
+  "answer": "chó",
+  "hint": "Con vật biết chạy, bay hoặc bơi.",
+  "explanation": "\"Chó\" là một con vật."
+ },
+ {
+  "id": "viet_022",
+  "subject": "viet",
+  "stage": "words",
+  "type": "multiple_choice",
+  "emoji": "🪑",
+  "prompt": "Từ nào chỉ đồ vật?",
+  "choices": [
+   "ghế",
+   "mèo",
+   "gà"
+  ],
+  "answer": "ghế",
+  "hint": "Đồ vật là thứ ta dùng, không phải con vật.",
+  "explanation": "\"Ghế\" là đồ vật."
+ },
+ {
+  "id": "viet_023",
+  "subject": "viet",
+  "stage": "words",
+  "type": "multiple_choice",
+  "emoji": "🍎",
+  "prompt": "Từ nào chỉ một loại quả?",
+  "choices": [
+   "táo",
+   "bàn",
+   "cá"
+  ],
+  "answer": "táo",
+  "hint": "Quả là thứ ta ăn được, mọc trên cây.",
+  "explanation": "\"Táo\" là một loại quả."
+ },
+ {
+  "id": "viet_024",
+  "subject": "viet",
+  "stage": "words",
+  "type": "multiple_choice",
+  "emoji": "👴",
+  "prompt": "Từ nào chỉ người thân trong gia đình?",
+  "choices": [
+   "ông",
+   "bút",
+   "vở"
+  ],
+  "answer": "ông",
+  "hint": "Người thân là những người như bà, mẹ, bố...",
+  "explanation": "\"Ông\" là người thân."
+ },
+ {
+  "id": "viet_025",
+  "subject": "viet",
+  "stage": "words",
+  "type": "multiple_choice",
+  "emoji": "🎨",
+  "prompt": "Từ nào chỉ màu sắc?",
+  "choices": [
+   "đỏ",
+   "mẹ",
+   "bé"
+  ],
+  "answer": "đỏ",
+  "hint": "Màu sắc như xanh, vàng...",
+  "explanation": "\"Đỏ\" là màu sắc."
+ },
+ {
+  "id": "viet_026",
+  "subject": "viet",
+  "stage": "words",
+  "type": "multiple_choice",
+  "emoji": "📚",
+  "prompt": "Bé ... bài. Chọn từ điền vào chỗ trống.",
+  "choices": [
+   "học",
+   "ngủ",
+   "ăn"
+  ],
+  "answer": "học",
+  "hint": "Bé làm gì với bài ở lớp?",
+  "explanation": "\"Bé học bài\" là câu đúng."
+ },
+ {
+  "id": "viet_027",
+  "subject": "viet",
+  "stage": "words",
+  "type": "multiple_choice",
+  "emoji": "🐱",
+  "prompt": "Có mấy tiếng trong \"con mèo\"?",
+  "choices": [
+   "2",
+   "1",
+   "3"
+  ],
+  "answer": "2",
+  "hint": "Vỗ tay theo từng tiếng: con - mèo.",
+  "explanation": "\"Con mèo\" có hai tiếng."
+ },
+ {
+  "id": "viet_028",
+  "subject": "viet",
+  "stage": "words",
+  "type": "multiple_choice",
+  "emoji": "📖",
+  "prompt": "Có mấy tiếng trong \"bé học bài\"?",
+  "choices": [
+   "3",
+   "2",
+   "4"
+  ],
+  "answer": "3",
+  "hint": "Vỗ tay theo từng tiếng: bé - học - bài.",
+  "explanation": "\"Bé học bài\" có ba tiếng."
+ },
+ {
+  "id": "viet_029",
+  "subject": "viet",
+  "stage": "words",
+  "type": "multiple_choice",
+  "emoji": "🔤",
+  "prompt": "Ghép b + à. Ta được tiếng nào?",
+  "choices": [
+   "bà",
+   "bê",
+   "bú"
+  ],
+  "answer": "bà",
+  "hint": "Đọc nối: bờ - à = bà.",
+  "explanation": "b ghép với à được \"bà\"."
+ },
+ {
+  "id": "viet_030",
+  "subject": "viet",
+  "stage": "words",
+  "type": "multiple_choice",
+  "emoji": "🔠",
+  "prompt": "Chữ in hoa của chữ \"b\" là gì?",
+  "choices": [
+   "B",
+   "D",
+   "P"
+  ],
+  "answer": "B",
+  "hint": "Chữ B có hai cái bụng.",
+  "explanation": "Chữ in hoa của b là B."
+ }
+]

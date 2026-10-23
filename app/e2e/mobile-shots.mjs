@@ -1,0 +1,25 @@
+// Dev helper: screenshot every screen on a small touch phone. Usage: node e2e/mobile-shots.mjs <outDir>
+import { chromium } from '@playwright/test'
+
+const out = process.argv[2]
+const b = await chromium.launch({ channel: 'msedge' })
+const p = await b.newPage({ viewport: { width: 360, height: 640 }, hasTouch: true, isMobile: true })
+await p.goto('http://localhost:4173')
+await p.evaluate(() => localStorage.clear())
+await p.reload()
+await p.screenshot({ path: `${out}/m1-home.png` })
+await p.getByTestId('play').tap()
+await p.screenshot({ path: `${out}/m2-style.png`, fullPage: true })
+await p.getByTestId('style-chibi').tap()
+await p.getByTestId('confirm-style').tap()
+await p.screenshot({ path: `${out}/m3-studio.png` })
+await p.screenshot({ path: `${out}/m3b-studio-full.png`, fullPage: true })
+await p.getByTestId('tab-dress').tap()
+await p.locator('[data-locked="true"]').first().tap()
+await p.screenshot({ path: `${out}/m4-question.png` })
+await p.getByRole('button', { name: 'Để sau' }).tap()
+await p.getByTestId('open-collection').tap()
+await p.screenshot({ path: `${out}/m5-collection.png` })
+const overflow = await p.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)
+console.log('horizontal overflow px:', overflow)
+await b.close()

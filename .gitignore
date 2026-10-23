@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.log
+# Raw downloaded assets are not redistributed (licenses forbid re-sharing them on their own); keep only the log.
+assets-raw/*
+!assets-raw/ASSET_LOG.md
+# Source design doc stays local
+*.docx
+app/test-results/
+app/playwright-report/
