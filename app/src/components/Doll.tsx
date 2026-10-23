@@ -256,7 +256,7 @@ function layersFor(item: Item): Layer[] {
         bun: 'M40 90 Q36 36 100 32 Q164 36 160 90 Z',
       }
       const front =
-        'M40 98 Q34 34 100 32 Q166 34 160 98 Q152 62 122 68 Q100 48 78 68 Q48 62 40 98 Z M40 98 Q34 124 44 146 Q56 124 58 96 Z M160 98 Q166 124 156 146 Q144 124 142 96 Z'
+        'M41 106 Q33 34 100 32 Q167 34 159 106 Q150 64 122 68 Q100 50 78 68 Q50 64 41 106 Z'
       return [
         [1, <g key="b">{defs}<P d={back[item.shape] ?? back.long} /></g>],
         [
