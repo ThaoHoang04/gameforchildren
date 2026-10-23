@@ -4,124 +4,130 @@ import { ITEM_BY_ID } from '../data/items'
 import type { Item, Outfit, Slot, ThemeId } from '../types'
 
 /**
- * Placeholder vector art. Each item renders as one or more z-ordered layers in a
- * shared 200x400 coordinate space, so real PNG layers can replace these later
- * without changing the Doll API.
+ * Chibi-style placeholder vector art. Each item renders as z-ordered layers in a shared
+ * coordinate space, so real PNG layers could replace these without changing the Doll API.
  */
 type Layer = [z: number, node: ReactNode]
 
-const STROKE = 'rgba(80,40,60,.28)'
+/* ---------- colour helpers ---------- */
+function rgb(hex: string): [number, number, number] {
+  const h = hex.replace('#', '')
+  const f = h.length === 3 ? h.replace(/./g, '$&$&') : h
+  return [parseInt(f.slice(0, 2), 16), parseInt(f.slice(2, 4), 16), parseInt(f.slice(4, 6), 16)]
+}
+const mix = (hex: string, to: number, t: number) => {
+  const [r, g, b] = rgb(hex)
+  const m = (v: number) => Math.round(v + (to - v) * t)
+  return `rgb(${m(r)},${m(g)},${m(b)})`
+}
+const lighten = (hex: string, t = 0.3) => mix(hex, 255, t)
+const darken = (hex: string, t = 0.3) => mix(hex, 0, t)
 
-const P = ({ d, c, extra }: { d: string; c: string; extra?: object }) => (
-  <path d={d} fill={c} stroke={STROKE} strokeWidth={1.5} strokeLinejoin="round" {...extra} />
-)
+function Grad({ id, c }: { id: string; c: string }) {
+  return (
+    <defs>
+      <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor={lighten(c, 0.35)} />
+        <stop offset="0.55" stopColor={c} />
+        <stop offset="1" stopColor={darken(c, 0.14)} />
+      </linearGradient>
+    </defs>
+  )
+}
+
+const sparkle = (x: number, y: number, s = 6) =>
+  `M${x} ${y - s} L${x + s / 3} ${y - s / 3} L${x + s} ${y} L${x + s / 3} ${y + s / 3} L${x} ${y + s} L${x - s / 3} ${y + s / 3} L${x - s} ${y} L${x - s / 3} ${y - s / 3} Z`
 
 function layersFor(item: Item): Layer[] {
   const c = item.color
+  const gid = `g-${item.id}`
+  const line = darken(c, 0.42)
+  const fill = `url(#${gid})`
+  const P = ({ d, extra }: { d: string; extra?: object }) => (
+    <path d={d} fill={fill} stroke={line} strokeWidth={2.2} strokeLinejoin="round" strokeLinecap="round" {...extra} />
+  )
+  const defs = <Grad key="defs" id={gid} c={c} />
+
   switch (item.slot) {
     case 'hair': {
       const back: Record<string, string> = {
-        long: 'M58 70 Q58 20 100 20 Q142 20 142 70 L150 235 Q100 255 50 235 Z',
-        bob: 'M58 70 Q58 20 100 20 Q142 20 142 70 L146 118 Q100 132 54 118 Z',
-        ponytail: 'M126 40 Q168 60 160 140 Q150 100 128 78 Z',
-        pigtails: 'M60 60 Q20 80 36 150 Q56 120 66 86 Z M140 60 Q180 80 164 150 Q144 120 134 86 Z',
-        bun: '',
+        long: 'M38 92 Q32 34 100 30 Q168 34 162 92 L172 238 Q100 266 28 238 Z',
+        bob: 'M38 92 Q32 34 100 30 Q168 34 162 92 L168 152 Q100 176 32 152 Z',
+        ponytail: 'M40 90 Q36 36 100 32 Q164 36 160 90 Q150 60 100 58 Q50 60 40 90 Z M140 62 Q204 66 190 176 Q176 118 134 98 Z',
+        pigtails:
+          'M42 76 Q-2 98 22 196 Q52 164 58 108 Z M158 76 Q202 98 178 196 Q148 164 142 108 Z M40 90 Q36 36 100 32 Q164 36 160 90 Z',
+        bun: 'M40 90 Q36 36 100 32 Q164 36 160 90 Z',
       }
-      const front: Record<string, string> = {
-        long: 'M60 72 Q64 24 100 24 Q136 24 140 72 Q122 48 100 48 Q78 48 60 72 Z',
-        bob: 'M60 72 Q64 24 100 24 Q136 24 140 72 Q122 46 100 46 Q78 46 60 72 Z',
-        ponytail: 'M60 72 Q64 24 100 24 Q136 24 140 72 Q120 48 100 48 Q80 48 60 72 Z',
-        pigtails: 'M60 72 Q64 24 100 24 Q136 24 140 72 Q120 48 100 48 Q80 48 60 72 Z',
-        bun: 'M60 72 Q64 24 100 24 Q136 24 140 72 Q120 48 100 48 Q80 48 60 72 Z',
-      }
+      const front =
+        'M40 98 Q34 34 100 32 Q166 34 160 98 Q152 62 122 68 Q100 48 78 68 Q48 62 40 98 Z M40 98 Q34 124 44 146 Q56 124 58 96 Z M160 98 Q166 124 156 146 Q144 124 142 96 Z'
       return [
-        [1, <P key="b" d={back[item.shape] ?? ''} c={c} />],
+        [1, <g key="b">{defs}<P d={back[item.shape] ?? back.long} /></g>],
         [
           8,
           <g key="f">
-            <P d={front[item.shape] ?? front.long} c={c} />
-            {/* side locks framing the face */}
-            <P d="M60 72 Q56 96 64 112 Q68 92 70 70 Z M140 72 Q144 96 136 112 Q132 92 130 70 Z" c={c} />
-            {/* shine */}
-            <path d="M76 38 Q92 30 110 32" stroke="#fff" strokeOpacity=".55" strokeWidth="4" fill="none" strokeLinecap="round" />
+            <P d={front} />
+            <path d="M66 46 Q88 34 116 38" stroke="#fff" strokeOpacity=".6" strokeWidth="5" fill="none" strokeLinecap="round" />
           </g>,
         ],
-        ...(item.shape === 'bun' ? ([[8, <circle key="u" cx="100" cy="18" r="16" fill={c} stroke={STROKE} />]] as Layer[]) : []),
+        ...(item.shape === 'bun'
+          ? ([[8, <g key="u"><circle cx="100" cy="26" r="21" fill={fill} stroke={line} strokeWidth="2.2" /><path d="M88 18 Q98 10 110 14" stroke="#fff" strokeOpacity=".6" strokeWidth="4" fill="none" strokeLinecap="round" /></g>]] as Layer[])
+          : []),
         ...(item.shape === 'pigtails'
-          ? ([
-              [
-                8,
-                <g key="ties">
-                  <circle cx="64" cy="64" r="5" fill="#ff7fb0" stroke={STROKE} />
-                  <circle cx="136" cy="64" r="5" fill="#ff7fb0" stroke={STROKE} />
-                </g>,
-              ],
-            ] as Layer[])
+          ? ([[8, <g key="ties"><circle cx="48" cy="82" r="7" fill="#ff7fb0" stroke={line} /><circle cx="152" cy="82" r="7" fill="#ff7fb0" stroke={line} /></g>]] as Layer[])
           : []),
       ]
     }
     case 'top': {
       const d: Record<string, string> = {
-        tee: 'M72 108 L128 108 L142 152 L124 158 L124 205 L76 205 L76 158 L58 152 Z',
-        tank: 'M82 108 L118 108 L126 205 L74 205 Z',
-        jacket: 'M70 108 L130 108 L146 170 L126 176 L126 208 L74 208 L74 176 L54 170 Z',
+        tee: 'M74 144 L126 144 L144 182 L126 188 L126 214 L74 214 L74 188 L56 182 Z',
+        tank: 'M80 144 L120 144 L128 214 L72 214 Z',
+        jacket: 'M72 144 L128 144 L148 196 L128 202 L128 216 L72 216 L72 202 L52 196 Z',
       }
       return [
         [
           5,
           <g key="t">
-            <P d={d[item.shape] ?? d.tee} c={c} />
-            {item.shape === 'jacket' && <line x1="100" y1="108" x2="100" y2="208" stroke={STROKE} strokeWidth="2" />}
+            {defs}
+            <P d={d[item.shape] ?? d.tee} />
+            {item.shape === 'jacket' && <path d="M100 146 L100 216" stroke={line} strokeWidth="2.4" />}
+            <path d="M86 156 Q100 164 114 156" stroke="#fff" strokeOpacity=".5" strokeWidth="3" fill="none" strokeLinecap="round" />
           </g>,
         ],
       ]
     }
     case 'bottom': {
       const d: Record<string, string> = {
-        skirt: 'M74 198 L126 198 L152 276 L48 276 Z',
-        shorts: 'M74 198 L126 198 L129 252 L102 252 L100 232 L98 252 L71 252 Z',
-        pants: 'M74 198 L126 198 L124 348 L103 348 L100 235 L97 348 L76 348 Z',
+        skirt: 'M74 208 L126 208 L152 260 L48 260 Z',
+        shorts: 'M74 208 L126 208 L128 244 L102 244 L100 230 L98 244 L72 244 Z',
+        pants: 'M74 208 L126 208 L124 268 L103 268 L100 232 L97 268 L76 268 Z',
       }
-      return [[4, <P key="b" d={d[item.shape] ?? d.skirt} c={c} />]]
+      return [[4, <g key="b">{defs}<P d={d[item.shape] ?? d.skirt} /></g>]]
     }
     case 'dress': {
       const d: Record<string, string> = {
-        princess: 'M72 108 L128 108 L124 160 L178 335 L22 335 L76 160 Z',
-        aline: 'M74 108 L126 108 L122 170 L160 305 L40 305 L78 170 Z',
-        sundress: 'M82 108 L90 108 L100 124 L110 108 L118 108 L124 170 L152 292 L48 292 L76 170 Z',
+        princess: 'M74 144 L126 144 L122 186 L166 258 L34 258 L78 186 Z',
+        aline: 'M74 144 L126 144 L122 192 L154 254 L46 254 L78 192 Z',
+        sundress: 'M82 144 L90 144 L100 158 L110 144 L118 144 L124 192 L150 250 L50 250 L76 192 Z',
       }
       return [
         [
           6,
           <g key="d">
-            <P d={d[item.shape] ?? d.aline} c={c} />
-            {/* waist ribbon */}
-            <path d="M78 162 Q100 172 122 162 L122 170 Q100 180 78 170 Z" fill="#fff" fillOpacity=".65" />
-            {/* skirt folds */}
-            <path d="M88 180 L76 290 M100 182 L100 295 M112 180 L124 290" stroke="rgba(80,40,60,.12)" strokeWidth="2" fill="none" />
+            {defs}
+            <P d={d[item.shape] ?? d.aline} />
+            <path d="M78 188 Q100 200 122 188 L122 196 Q100 208 78 196 Z" fill="#fff" fillOpacity=".7" />
+            <path d="M86 204 L68 252 M100 206 L100 254 M114 204 L132 252" stroke={line} strokeOpacity=".22" strokeWidth="2" fill="none" />
             {item.shape === 'princess' && (
-              <g fill="#fff" fillOpacity=".9">
-                {[
-                  [60, 300],
-                  [92, 250],
-                  [130, 280],
-                  [150, 318],
-                  [110, 316],
-                  [72, 214],
-                  [124, 222],
-                ].map(([x, y]) => (
-                  <path key={`${x}-${y}`} d={`M${x} ${y - 6} L${x + 2} ${y - 2} L${x + 6} ${y} L${x + 2} ${y + 2} L${x} ${y + 6} L${x - 2} ${y + 2} L${x - 6} ${y} L${x - 2} ${y - 2} Z`} />
+              <g fill="#fff" fillOpacity=".95">
+                {[[58, 248], [92, 228], [140, 244], [148, 252], [114, 250], [74, 218], [128, 220]].map(([x, y]) => (
+                  <path key={`${x}-${y}`} d={sparkle(x, y, 7)} />
                 ))}
               </g>
             )}
             {item.shape === 'sundress' &&
-              [
-                [70, 270],
-                [100, 250],
-                [130, 272],
-                [86, 220],
-                [116, 214],
-              ].map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r="5" fill="#fff" fillOpacity=".75" />)}
+              [[72, 240], [100, 226], [130, 240], [88, 210], [116, 210]].map(([x, y]) => (
+                <circle key={`${x}-${y}`} cx={x} cy={y} r="5" fill="#fff" fillOpacity=".8" />
+              ))}
           </g>,
         ],
       ]
@@ -130,79 +136,84 @@ function layersFor(item: Item): Layer[] {
       const body =
         item.shape === 'sneakers' ? (
           <>
-            <ellipse cx="88" cy="372" rx="17" ry="9" fill={c} stroke={STROKE} />
-            <ellipse cx="112" cy="372" rx="17" ry="9" fill={c} stroke={STROKE} />
-            <rect x="72" y="376" width="32" height="4" rx="2" fill="#fff" stroke={STROKE} />
-            <rect x="96" y="376" width="32" height="4" rx="2" fill="#fff" stroke={STROKE} />
+            <ellipse cx="88" cy="270" rx="19" ry="10" fill={fill} stroke={line} strokeWidth="2.2" />
+            <ellipse cx="112" cy="270" rx="19" ry="10" fill={fill} stroke={line} strokeWidth="2.2" />
+            <path d="M70 274 H106 M94 274 H130" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
           </>
         ) : item.shape === 'boots' ? (
           <>
-            <path d="M78 322 L98 322 L100 372 L72 376 L72 366 L78 366 Z" fill={c} stroke={STROKE} />
-            <path d="M122 322 L102 322 L100 372 L128 376 L128 366 L122 366 Z" fill={c} stroke={STROKE} />
+            <path d="M78 238 L97 238 L99 272 L72 276 L72 262 L78 262 Z" fill={fill} stroke={line} strokeWidth="2.2" strokeLinejoin="round" />
+            <path d="M122 238 L103 238 L101 272 L128 276 L128 262 L122 262 Z" fill={fill} stroke={line} strokeWidth="2.2" strokeLinejoin="round" />
           </>
         ) : (
           <>
-            <path d="M80 360 L98 360 L98 374 L72 376 Z" fill={c} stroke={STROKE} />
-            <path d="M120 360 L102 360 L102 374 L128 376 Z" fill={c} stroke={STROKE} />
-            <rect x="76" y="374" width="4" height="8" fill={c} />
-            <rect x="120" y="374" width="4" height="8" fill={c} />
+            <path d="M78 262 L98 262 L98 274 L70 276 Z" fill={fill} stroke={line} strokeWidth="2.2" strokeLinejoin="round" />
+            <path d="M122 262 L102 262 L102 274 L130 276 Z" fill={fill} stroke={line} strokeWidth="2.2" strokeLinejoin="round" />
           </>
         )
-      return [[3, <g key="s">{body}</g>]]
+      return [[3, <g key="s">{defs}{body}</g>]]
     }
     case 'head': {
       const m: Record<string, ReactNode> = {
-        crown: <P d="M68 40 L74 12 L88 30 L100 6 L112 30 L126 12 L132 40 Z" c={c} />,
+        crown: (
+          <g>
+            <P d="M62 52 L68 16 L86 38 L100 8 L114 38 L132 16 L138 52 Z" />
+            <rect x="62" y="46" width="76" height="9" rx="4" fill="#ffd447" stroke={line} strokeWidth="2" />
+            <circle cx="100" cy="24" r="4.5" fill="#ff5f9d" />
+            <circle cx="72" cy="38" r="3.5" fill="#6cc8f5" />
+            <circle cx="128" cy="38" r="3.5" fill="#6cc8f5" />
+          </g>
+        ),
         bow: (
           <g>
-            <P d="M128 34 L156 20 L156 48 Z" c={c} />
-            <P d="M128 34 L100 20 L100 48 Z" c={c} />
-            <circle cx="128" cy="34" r="6" fill={c} stroke={STROKE} />
+            <P d="M142 54 L116 40 L116 68 Z" />
+            <P d="M142 54 L172 38 L172 70 Z" />
+            <circle cx="142" cy="54" r="8" fill={fill} stroke={line} strokeWidth="2.2" />
           </g>
         ),
         flower: (
           <g>
             {[0, 72, 144, 216, 288].map((a) => (
-              <ellipse key={a} cx="72" cy="30" rx="6" ry="10" fill={c} stroke={STROKE} transform={`rotate(${a} 72 40)`} />
+              <ellipse key={a} cx="64" cy="44" rx="8" ry="12" fill={fill} stroke={line} strokeWidth="1.8" transform={`rotate(${a} 64 56)`} />
             ))}
-            <circle cx="72" cy="40" r="5" fill="#ffd447" />
+            <circle cx="64" cy="56" r="7" fill="#ffd447" stroke={line} strokeWidth="1.8" />
           </g>
         ),
         catears: (
           <g>
-            <P d="M62 44 L66 6 L92 28 Z" c={c} />
-            <P d="M138 44 L134 6 L108 28 Z" c={c} />
-            <path d="M68 30 L70 16 L82 28 Z M132 30 L130 16 L118 28 Z" fill="#ffb3c8" />
+            <P d="M48 66 L52 14 L96 44 Z" />
+            <P d="M152 66 L148 14 L104 44 Z" />
+            <path d="M58 46 L60 28 L78 42 Z M142 46 L140 28 L122 42 Z" fill="#ffb3c8" />
           </g>
         ),
         bunnyears: (
           <g>
-            <ellipse cx="80" cy="-6" rx="11" ry="34" fill={c} stroke={STROKE} transform="rotate(-8 80 30)" />
-            <ellipse cx="120" cy="-6" rx="11" ry="34" fill={c} stroke={STROKE} transform="rotate(8 120 30)" />
-            <ellipse cx="80" cy="-4" rx="5" ry="24" fill="#ffb3c8" transform="rotate(-8 80 30)" />
-            <ellipse cx="120" cy="-4" rx="5" ry="24" fill="#ffb3c8" transform="rotate(8 120 30)" />
+            <ellipse cx="74" cy="-2" rx="15" ry="44" fill={fill} stroke={line} strokeWidth="2.2" transform="rotate(-10 74 40)" />
+            <ellipse cx="126" cy="-2" rx="15" ry="44" fill={fill} stroke={line} strokeWidth="2.2" transform="rotate(10 126 40)" />
+            <ellipse cx="74" cy="0" rx="7" ry="30" fill="#ffb3c8" transform="rotate(-10 74 40)" />
+            <ellipse cx="126" cy="0" rx="7" ry="30" fill="#ffb3c8" transform="rotate(10 126 40)" />
           </g>
         ),
         hat: (
           <g>
-            <ellipse cx="100" cy="40" rx="56" ry="10" fill={c} stroke={STROKE} />
-            <path d="M68 40 Q70 8 100 8 Q130 8 132 40 Z" fill={c} stroke={STROKE} />
-            <rect x="68" y="30" width="64" height="7" fill="#e86a8c" />
+            <ellipse cx="100" cy="58" rx="76" ry="15" fill={fill} stroke={line} strokeWidth="2.2" />
+            <path d="M62 58 Q62 8 100 8 Q138 8 138 58 Z" fill={fill} stroke={line} strokeWidth="2.2" strokeLinejoin="round" />
+            <rect x="62" y="44" width="76" height="9" fill="#e86a8c" />
           </g>
         ),
       }
-      return [[9, <g key="h">{m[item.shape] ?? m.bow}</g>]]
+      return [[9, <g key="h">{defs}{m[item.shape] ?? m.bow}</g>]]
     }
     case 'face': {
       const heart = (x: number) => (
         <path
           key={x}
-          transform={`translate(${x} 72)`}
+          transform={`translate(${x} 100) scale(1.5)`}
           d="M0 -5 C-4 -13 -16 -9 -14 0 C-12 8 0 14 0 14 C0 14 12 8 14 0 C16 -9 4 -13 0 -5 Z"
           fill={c}
-          fillOpacity=".45"
-          stroke={c}
-          strokeWidth="3"
+          fillOpacity=".4"
+          stroke={darken(c, 0.2)}
+          strokeWidth="2.4"
         />
       )
       return [
@@ -211,16 +222,16 @@ function layersFor(item: Item): Layer[] {
           <g key="g">
             {item.shape === 'heartglasses' ? (
               <>
-                {heart(86)}
-                {heart(114)}
+                {heart(76)}
+                {heart(124)}
               </>
             ) : (
               <>
-                <circle cx="86" cy="72" r="12" fill="#fff" fillOpacity=".3" stroke={c} strokeWidth="3" />
-                <circle cx="114" cy="72" r="12" fill="#fff" fillOpacity=".3" stroke={c} strokeWidth="3" />
+                <circle cx="76" cy="100" r="19" fill="#fff" fillOpacity=".25" stroke={c} strokeWidth="4" />
+                <circle cx="124" cy="100" r="19" fill="#fff" fillOpacity=".25" stroke={c} strokeWidth="4" />
               </>
             )}
-            <line x1="98" y1="72" x2="102" y2="72" stroke={c} strokeWidth="3" />
+            <path d="M95 100 H105" stroke={c} strokeWidth="4" />
           </g>,
         ],
       ]
@@ -231,20 +242,23 @@ function layersFor(item: Item): Layer[] {
           [
             0,
             <g key="w">
-              <ellipse cx="42" cy="150" rx="34" ry="62" fill={c} fillOpacity=".85" stroke={STROKE} transform="rotate(-25 42 150)" />
-              <ellipse cx="158" cy="150" rx="34" ry="62" fill={c} fillOpacity=".85" stroke={STROKE} transform="rotate(25 158 150)" />
+              {defs}
+              <ellipse cx="32" cy="168" rx="36" ry="66" fill={fill} fillOpacity=".9" stroke={line} strokeWidth="2" transform="rotate(-24 32 168)" />
+              <ellipse cx="168" cy="168" rx="36" ry="66" fill={fill} fillOpacity=".9" stroke={line} strokeWidth="2" transform="rotate(24 168 168)" />
+              <ellipse cx="38" cy="176" rx="18" ry="38" fill="#fff" fillOpacity=".35" transform="rotate(-24 38 176)" />
+              <ellipse cx="162" cy="176" rx="18" ry="38" fill="#fff" fillOpacity=".35" transform="rotate(24 162 176)" />
             </g>,
           ],
         ]
       if (item.shape === 'tail')
-        return [[0, <path key="t" d="M120 215 Q190 200 175 140 Q165 190 125 195 Z" fill={c} stroke={STROKE} />]]
+        return [[0, <g key="t">{defs}<P d="M122 206 Q200 204 190 140 Q180 192 124 194 Z" /></g>]]
       return [
-        [0, <rect key="bp" x="66" y="112" width="68" height="84" rx="14" fill={c} stroke={STROKE} />],
+        [0, <g key="bp">{defs}<rect x="66" y="142" width="68" height="78" rx="16" fill={fill} stroke={line} strokeWidth="2.2" /></g>],
         [
           7,
           <g key="st">
-            <rect x="76" y="108" width="8" height="70" rx="3" fill={c} stroke={STROKE} />
-            <rect x="116" y="108" width="8" height="70" rx="3" fill={c} stroke={STROKE} />
+            <rect x="78" y="140" width="8" height="46" rx="3" fill={fill} stroke={line} strokeWidth="1.8" />
+            <rect x="114" y="140" width="8" height="46" rx="3" fill={fill} stroke={line} strokeWidth="1.8" />
           </g>,
         ],
       ]
@@ -252,49 +266,62 @@ function layersFor(item: Item): Layer[] {
   }
 }
 
-function BodyLayers({ skin }: { skin: string }): Layer[] {
+function BodyLayers({ skin, id }: { skin: string; id: string }): Layer[] {
+  const gid = `skin-${id}`
+  const edge = darken(skin.startsWith('#') ? skin : '#f6cfb0', 0.3)
   return [
-    [-1, <ellipse key="shadow" cx="100" cy="384" rx="62" ry="9" fill="rgba(90,50,110,.15)" />],
+    [-1, <ellipse key="shadow" cx="100" cy="284" rx="66" ry="10" fill="rgba(90,50,110,.18)" />],
     [
       2,
       <g key="body">
-        <circle cx="51" cy="207" r="8" fill={skin} stroke={STROKE} />
-        <circle cx="149" cy="207" r="8" fill={skin} stroke={STROKE} />
-        <rect x="92" y="100" width="16" height="20" fill={skin} />
-        <path d="M74 108 L126 108 L130 205 L70 205 Z" fill={skin} stroke={STROKE} />
-        <line x1="68" y1="118" x2="52" y2="205" stroke={skin} strokeWidth="13" strokeLinecap="round" />
-        <line x1="132" y1="118" x2="148" y2="205" stroke={skin} strokeWidth="13" strokeLinecap="round" />
-        <rect x="76" y="200" width="20" height="162" rx="9" fill={skin} stroke={STROKE} />
-        <rect x="104" y="200" width="20" height="162" rx="9" fill={skin} stroke={STROKE} />
-        <circle cx="100" cy="70" r="38" fill={skin} stroke={STROKE} />
+        <defs>
+          <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor={lighten(skin, 0.25)} />
+            <stop offset="1" stopColor={skin} />
+          </linearGradient>
+        </defs>
+        {/* legs */}
+        <rect x="82" y="206" width="16" height="62" rx="8" fill={`url(#${gid})`} stroke={edge} strokeWidth="2" />
+        <rect x="102" y="206" width="16" height="62" rx="8" fill={`url(#${gid})`} stroke={edge} strokeWidth="2" />
+        {/* arms and hands */}
+        <line x1="76" y1="152" x2="60" y2="204" stroke={edge} strokeWidth="15" strokeLinecap="round" />
+        <line x1="124" y1="152" x2="140" y2="204" stroke={edge} strokeWidth="15" strokeLinecap="round" />
+        <line x1="76" y1="152" x2="60" y2="204" stroke={`url(#${gid})`} strokeWidth="11" strokeLinecap="round" />
+        <line x1="124" y1="152" x2="140" y2="204" stroke={`url(#${gid})`} strokeWidth="11" strokeLinecap="round" />
+        {/* torso + neck */}
+        <rect x="90" y="132" width="20" height="22" fill={skin} />
+        <path d="M76 144 Q100 138 124 144 L126 214 L74 214 Z" fill={`url(#${gid})`} stroke={edge} strokeWidth="2" strokeLinejoin="round" />
+        {/* head */}
+        <ellipse cx="100" cy="92" rx="58" ry="54" fill={`url(#${gid})`} stroke={edge} strokeWidth="2.2" />
+        <ellipse cx="44" cy="100" rx="5" ry="8" fill={skin} stroke={edge} strokeWidth="1.5" />
+        <ellipse cx="156" cy="100" rx="5" ry="8" fill={skin} stroke={edge} strokeWidth="1.5" />
       </g>,
     ],
     [
       7,
       <g key="face">
-        {/* brows */}
-        <path d="M78 58 Q85 54 92 57 M108 57 Q115 54 122 58" stroke="#7a4a3a" strokeWidth="2" fill="none" strokeLinecap="round" />
-        {[86, 114].map((x) => (
+        <path d="M60 80 Q70 74 90 78 M110 78 Q130 74 140 80" stroke="#7a4a3a" strokeWidth="3" fill="none" strokeLinecap="round" />
+        {[76, 124].map((x) => (
           <g key={x}>
-            <ellipse cx={x} cy="73" rx="8" ry="10" fill="#fff" />
-            <ellipse cx={x} cy="74" rx="6.5" ry="8.5" fill="#6b3f8f" />
-            <ellipse cx={x} cy="75" rx="3.5" ry="5" fill="#2b1838" />
-            <circle cx={x + 2.5} cy="70" r="2.6" fill="#fff" />
-            <circle cx={x - 2.5} cy="78" r="1.3" fill="#fff" />
-            {/* lashes */}
+            <ellipse cx={x} cy="102" rx="13" ry="16" fill="#3a2250" />
+            <ellipse cx={x} cy="106" rx="11" ry="12" fill="#7c4fb5" />
+            <ellipse cx={x} cy="108" rx="7" ry="8" fill="#2b1838" />
+            <circle cx={x + 4} cy="96" r="5" fill="#fff" />
+            <circle cx={x - 4} cy="110" r="2.4" fill="#fff" />
             <path
-              d={`M${x - 9} 68 Q${x} 60 ${x + 9} 68 M${x + (x < 100 ? -9 : 9)} 68 l${x < 100 ? -4 : 4} -3`}
+              d={`M${x - 14} 96 Q${x} 82 ${x + 14} 96`}
               stroke="#2b1838"
-              strokeWidth="2.4"
+              strokeWidth="3.4"
               fill="none"
               strokeLinecap="round"
             />
+            <path d={x < 100 ? `M${x - 13} 94 l-6 -4` : `M${x + 13} 94 l6 -4`} stroke="#2b1838" strokeWidth="3" strokeLinecap="round" />
           </g>
         ))}
-        <path d="M99 84 Q100 86 101 84" stroke="#d98a7a" strokeWidth="1.6" fill="none" strokeLinecap="round" />
-        <ellipse cx="74" cy="88" rx="7" ry="4" fill="#ff8fa3" opacity=".5" />
-        <ellipse cx="126" cy="88" rx="7" ry="4" fill="#ff8fa3" opacity=".5" />
-        <path d="M93 92 Q100 99 107 92 Q100 95 93 92 Z" fill="#e0607a" stroke="#c4506a" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M98 118 Q100 121 102 118" stroke="#d98a7a" strokeWidth="2" fill="none" strokeLinecap="round" />
+        <ellipse cx="58" cy="120" rx="10" ry="6" fill="#ff7f9a" opacity=".5" />
+        <ellipse cx="142" cy="120" rx="10" ry="6" fill="#ff7f9a" opacity=".5" />
+        <path d="M91 128 Q100 138 109 128 Q100 132 91 128 Z" fill="#e0607a" stroke="#c4506a" strokeWidth="2" strokeLinejoin="round" />
       </g>,
     ],
   ]
@@ -308,14 +335,14 @@ interface DollProps {
 
 export function Doll({ theme, outfit, className }: DollProps) {
   const skin = THEMES.find((t) => t.id === theme)!.skin
-  const layers: Layer[] = [...BodyLayers({ skin })]
+  const layers: Layer[] = [...BodyLayers({ skin, id: theme })]
   for (const id of Object.values(outfit)) {
     const item = id ? ITEM_BY_ID[id] : undefined
     if (item) layers.push(...layersFor(item))
   }
   layers.sort((a, b) => a[0] - b[0])
   return (
-    <svg viewBox="-10 -20 220 420" className={className} role="img" aria-label="Búp bê">
+    <svg viewBox="-12 -30 224 330" className={className} role="img" aria-label="Búp bê">
       {layers.map(([z, node], i) => (
         <g key={`${z}-${i}`}>{node}</g>
       ))}
@@ -324,14 +351,14 @@ export function Doll({ theme, outfit, className }: DollProps) {
 }
 
 const CROP: Record<Slot, string> = {
-  hair: '30 0 140 140',
-  head: '30 -40 140 120',
-  face: '60 40 80 60',
-  top: '40 100 120 120',
-  bottom: '30 190 140 170',
-  dress: '10 100 180 250',
-  shoes: '50 310 100 80',
-  back: '10 90 180 140',
+  hair: '20 14 160 150',
+  head: '20 -30 160 110',
+  face: '40 70 120 60',
+  top: '40 130 120 100',
+  bottom: '30 196 140 90',
+  dress: '20 134 160 150',
+  shoes: '50 232 100 60',
+  back: '0 110 200 130',
 }
 
 export function ItemThumb({ item, locked }: { item: Item; locked?: boolean }) {

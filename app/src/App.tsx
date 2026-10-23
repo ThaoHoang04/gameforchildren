@@ -107,6 +107,13 @@ export default function App() {
 
   return (
     <>
+      <div className="bg" aria-hidden="true">
+        {['⭐', '✨', '💖', '🌸', '⭐', '✨', '🎀', '💫'].map((e, i) => (
+          <span key={i} style={{ ['--i' as string]: i }}>
+            {e}
+          </span>
+        ))}
+      </div>
       {screen === 'home' && (
         <Home
           hasProgress={theme !== null}

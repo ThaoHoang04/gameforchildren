@@ -25,25 +25,40 @@ export function Studio(p: Props) {
   const [slot, setSlot] = useState<Slot>(slots[0].slot)
   const list = itemsFor(p.theme, slot)
   const [muted, setMutedState] = useState(isMuted)
+  const all = itemsFor(p.theme)
+  const have = all.filter((i) => p.owned.has(i.id)).length
+  // Changes whenever the outfit changes, so the doll "pops" when something is worn.
+  const outfitKey = Object.values(p.outfit).join('|')
 
   return (
     <main
-      className="screen studio"
-      style={{
-        background: `linear-gradient(160deg, ${info.bgFrom}, ${info.bgTo})`,
-        ['--accent' as string]: info.accent,
-      }}
+      className={`screen studio theme-${p.theme}`}
+      style={
+        {
+          ['--accent' as string]: info.accent,
+          ['--bg-from' as string]: info.bgFrom,
+          ['--bg-to' as string]: info.bgTo,
+        } as React.CSSProperties
+      }
     >
-      <header className="bar">
-        <button className="btn btn-ghost" onClick={p.onHome} aria-label="Màn hình chính">
+      <header className="hud">
+        <button className="round-btn" onClick={p.onHome} aria-label="Màn hình chính">
           🏠
         </button>
-        <h2>
-          {info.emoji} {info.name}
-        </h2>
-        <div className="bar-actions">
+        <div className="hud-title">
+          <span className="hud-theme">
+            {info.emoji} {info.name}
+          </span>
+          <div className="progress" role="img" aria-label={`Đã mở ${have} trên ${all.length} món`}>
+            <div className="progress-fill" style={{ width: `${(have / all.length) * 100}%` }} />
+            <span className="progress-text">
+              ⭐ {have}/{all.length}
+            </span>
+          </div>
+        </div>
+        <div className="hud-actions">
           <button
-            className="btn btn-ghost"
+            className="round-btn"
             aria-pressed={muted}
             aria-label={muted ? 'Bật âm thanh' : 'Tắt âm thanh'}
             onClick={() => {
@@ -54,10 +69,10 @@ export function Studio(p: Props) {
           >
             {muted ? '🔇' : '🔊'}
           </button>
-          <button className="btn btn-ghost" onClick={p.onChangeStyle} data-testid="change-style" aria-label="Đổi phong cách">
-            🎨<span className="hide-sm"> Đổi</span>
+          <button className="round-btn" onClick={p.onChangeStyle} data-testid="change-style" aria-label="Đổi phong cách">
+            🎨
           </button>
-          <button className="btn btn-ghost" onClick={p.onCollection} data-testid="open-collection" aria-label="Bộ sưu tập">
+          <button className="round-btn" onClick={p.onCollection} data-testid="open-collection" aria-label="Bộ sưu tập">
             📚
           </button>
         </div>
@@ -65,13 +80,24 @@ export function Studio(p: Props) {
 
       <div className="studio-body">
         <section className="stage" aria-label="Búp bê">
-          <Doll theme={p.theme} outfit={p.outfit} className="doll" />
+          <div className="scene" aria-hidden="true">
+            <span>✨</span>
+            <span>⭐</span>
+            <span>💖</span>
+            <span>✨</span>
+            <span>⭐</span>
+          </div>
+          <div className="spot" aria-hidden="true" />
+          <div key={outfitKey} className="doll-wrap">
+            <Doll theme={p.theme} outfit={p.outfit} className="doll" />
+          </div>
+          <div className="floor" aria-hidden="true" />
           <div className="stage-actions">
-            <button className="btn btn-ghost" onClick={p.onUndo} disabled={!p.canUndo} data-testid="undo">
+            <button className="btn btn-blue" onClick={p.onUndo} disabled={!p.canUndo} data-testid="undo">
               ↩ Hoàn tác
             </button>
-            <button className="btn btn-ghost" onClick={() => p.onClearSlot(slot)} disabled={!p.outfit[slot]} data-testid="clear-slot">
-              ✖ Tháo món này
+            <button className="btn btn-yellow" onClick={() => p.onClearSlot(slot)} disabled={!p.outfit[slot]} data-testid="clear-slot">
+              ✖ Tháo
             </button>
           </div>
           <div className={`saved${p.savedFlash ? ' show' : ''}`} role="status">
@@ -93,7 +119,10 @@ export function Studio(p: Props) {
                 }}
                 data-testid={`tab-${s.slot}`}
               >
-                <span aria-hidden="true">{s.emoji}</span> {s.label}
+                <span className="tab-ico" aria-hidden="true">
+                  {s.emoji}
+                </span>
+                <span className="tab-label">{s.label}</span>
               </button>
             ))}
           </div>

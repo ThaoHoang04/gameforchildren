@@ -24,6 +24,7 @@ export function Home({
       </h1>
       <p className="sub">Chọn đồ, trả lời câu hỏi, mở khóa trang phục xinh!</p>
       <div className="home-dolls" aria-hidden="true">
+        <div className="home-glow" />
         <Doll theme={theme} outfit={outfit} className="mini" />
       </div>
       <div className="stack">
@@ -32,7 +33,7 @@ export function Home({
             ▶ Tiếp tục chơi
           </button>
         )}
-        <button className={`btn btn-big ${hasProgress ? 'btn-ghost' : 'btn-primary'}`} onClick={onPlay} data-testid="play">
+        <button className={`btn btn-big ${hasProgress ? 'btn-yellow' : 'btn-primary'}`} onClick={onPlay} data-testid="play">
           ✨ Chơi ngay
         </button>
       </div>
@@ -56,7 +57,7 @@ export function StylePicker({
     <main className="screen">
       <header className="bar">
         {onBack ? (
-          <button className="btn btn-ghost" onClick={onBack}>
+          <button className="btn btn-blue" onClick={onBack}>
             ← Quay lại
           </button>
         ) : (

@@ -100,7 +100,7 @@ export function QuestionModal({ question, item, onCorrect, onClose }: Props) {
         </div>
 
         {solved ? (
-          <button className="btn btn-primary" onClick={onClose} data-testid="wear-now">
+          <button className="btn btn-green btn-big" onClick={onClose} data-testid="wear-now">
             ✨ Mặc ngay!
           </button>
         ) : (

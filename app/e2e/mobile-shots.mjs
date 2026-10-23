@@ -3,7 +3,7 @@ import { chromium } from '@playwright/test'
 
 const out = process.argv[2]
 const b = await chromium.launch({ channel: 'msedge' })
-const p = await b.newPage({ viewport: { width: 360, height: 640 }, hasTouch: true, isMobile: true })
+const p = await b.newPage({ viewport: { width: 360, height: 640 }, hasTouch: true, isMobile: true, reducedMotion: 'reduce' })
 await p.goto('http://localhost:4173')
 await p.evaluate(() => localStorage.clear())
 await p.reload()
