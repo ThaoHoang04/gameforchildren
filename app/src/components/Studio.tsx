@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SLOTS, THEMES } from '../data/config'
+import { TABS, THEMES } from '../data/config'
 import { itemsFor } from '../data/items'
 import { isMuted, play, setMuted } from '../logic/sound'
 import type { Item, Outfit, Slot, ThemeId } from '../types'
@@ -11,7 +11,7 @@ interface Props {
   owned: Set<string>
   savedFlash: boolean
   onSelectItem: (item: Item) => void
-  onClearSlot: (slot: Slot) => void
+  onClearSlots: (slots: Slot[]) => void
   onUndo: () => void
   canUndo: boolean
   onChangeStyle: () => void
@@ -21,9 +21,10 @@ interface Props {
 
 export function Studio(p: Props) {
   const info = THEMES.find((t) => t.id === p.theme)!
-  const slots = SLOTS.filter((s) => itemsFor(p.theme, s.slot).length > 0)
-  const [slot, setSlot] = useState<Slot>(slots[0].slot)
-  const list = itemsFor(p.theme, slot)
+  const tabs = TABS.filter((t) => itemsFor(p.theme, t.slots).length > 0)
+  const [tabId, setTabId] = useState(tabs[0].id)
+  const tab = tabs.find((t) => t.id === tabId) ?? tabs[0]
+  const list = itemsFor(p.theme, tab.slots)
   const [muted, setMutedState] = useState(isMuted)
   const all = itemsFor(p.theme)
   const have = all.filter((i) => p.owned.has(i.id)).length
@@ -96,7 +97,7 @@ export function Studio(p: Props) {
             <button className="btn btn-blue" onClick={p.onUndo} disabled={!p.canUndo} data-testid="undo">
               ↩ Hoàn tác
             </button>
-            <button className="btn btn-yellow" onClick={() => p.onClearSlot(slot)} disabled={!p.outfit[slot]} data-testid="clear-slot">
+            <button className="btn btn-yellow" onClick={() => p.onClearSlots(tab.slots)} disabled={!tab.slots.some((s) => p.outfit[s])} data-testid="clear-slot">
               ✖ Tháo
             </button>
           </div>
@@ -107,22 +108,22 @@ export function Studio(p: Props) {
 
         <section className="wardrobe" aria-label="Tủ đồ">
           <div className="tabs" role="tablist">
-            {slots.map((s) => (
+            {tabs.map((t) => (
               <button
-                key={s.slot}
+                key={t.id}
                 role="tab"
-                aria-selected={slot === s.slot}
-                className={`tab${slot === s.slot ? ' active' : ''}`}
+                aria-selected={tab.id === t.id}
+                className={`tab${tab.id === t.id ? ' active' : ''}`}
                 onClick={() => {
                   play('click')
-                  setSlot(s.slot)
+                  setTabId(t.id)
                 }}
-                data-testid={`tab-${s.slot}`}
+                data-testid={`tab-${t.id}`}
               >
                 <span className="tab-ico" aria-hidden="true">
-                  {s.emoji}
+                  {t.emoji}
                 </span>
-                <span className="tab-label">{s.label}</span>
+                <span className="tab-label">{t.label}</span>
               </button>
             ))}
           </div>

@@ -62,13 +62,15 @@ export const THEMES: ThemeInfo[] = [
   },
 ]
 
-export const SLOTS: { slot: Slot; label: string; emoji: string }[] = [
-  { slot: 'hair', label: 'Tóc', emoji: '💇' },
-  { slot: 'top', label: 'Áo', emoji: '👚' },
-  { slot: 'bottom', label: 'Quần/Váy', emoji: '👖' },
-  { slot: 'dress', label: 'Đầm', emoji: '👗' },
-  { slot: 'shoes', label: 'Giày', emoji: '👟' },
-  { slot: 'head', label: 'Mũ/Nơ', emoji: '🎀' },
-  { slot: 'face', label: 'Kính', emoji: '👓' },
-  { slot: 'back', label: 'Cánh/Balo', emoji: '🎒' },
+/** Wardrobe tabs. A tab can hold several slots (e.g. all makeup kinds). */
+export const TABS: { id: string; label: string; emoji: string; slots: Slot[] }[] = [
+  { id: 'dress', label: 'Đầm', emoji: '👗', slots: ['dress'] },
+  { id: 'hair', label: 'Tóc', emoji: '💇', slots: ['hair'] },
+  { id: 'makeup', label: 'Trang điểm', emoji: '💄', slots: ['lips', 'blush', 'eyeshadow', 'sticker'] },
+  { id: 'top', label: 'Áo', emoji: '👚', slots: ['top'] },
+  { id: 'bottom', label: 'Quần/Váy', emoji: '👖', slots: ['bottom'] },
+  { id: 'shoes', label: 'Giày', emoji: '👟', slots: ['shoes'] },
+  { id: 'head', label: 'Mũ/Nơ', emoji: '🎀', slots: ['head'] },
+  { id: 'face', label: 'Kính', emoji: '👓', slots: ['face'] },
+  { id: 'back', label: 'Cánh/Balo', emoji: '🎒', slots: ['back'] },
 ]

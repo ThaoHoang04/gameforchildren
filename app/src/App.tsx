@@ -87,9 +87,9 @@ export default function App() {
     )
   }
 
-  const onClearSlot = (slot: Slot) => {
+  const onClearSlots = (slots: Slot[]) => {
     pushUndo()
-    setOutfit((o) => unequip(o, slot))
+    setOutfit((o) => slots.reduce(unequip, o))
   }
 
   const onUndo = () => {
@@ -138,7 +138,7 @@ export default function App() {
           owned={owned}
           savedFlash={flash}
           onSelectItem={onSelectItem}
-          onClearSlot={onClearSlot}
+          onClearSlots={onClearSlots}
           onUndo={onUndo}
           canUndo={undo.length > 0}
           onChangeStyle={() => setScreen('style')}

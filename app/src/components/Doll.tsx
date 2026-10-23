@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { THEMES } from '../data/config'
 import { ITEM_BY_ID } from '../data/items'
-import type { Item, Outfit, Slot, ThemeId } from '../types'
+import type { Item, Outfit, Pattern, Slot, ThemeId } from '../types'
 
 /**
  * Chibi-style placeholder vector art. Each item renders as z-ordered layers in a shared
@@ -37,6 +37,203 @@ function Grad({ id, c }: { id: string; c: string }) {
 
 const sparkle = (x: number, y: number, s = 6) =>
   `M${x} ${y - s} L${x + s / 3} ${y - s / 3} L${x + s} ${y} L${x + s / 3} ${y + s / 3} L${x} ${y + s} L${x - s / 3} ${y + s / 3} L${x - s} ${y} L${x - s / 3} ${y - s / 3} Z`
+
+/** Scalloped (wavy) edge from (x0,y) to (x1,y), bumps hang downwards. */
+function scallop(x0: number, x1: number, y: number, n: number, depth: number) {
+  let d = ''
+  for (let k = 0; k < n; k++) {
+    const a = x0 + ((x1 - x0) * k) / n
+    const b = x0 + ((x1 - x0) * (k + 1)) / n
+    d += ` Q${(a + b) / 2} ${y + depth} ${b} ${y}`
+  }
+  return d
+}
+
+const heartPath = (x: number, y: number, s = 1) =>
+  `M${x} ${y - 3 * s} C${x - 3 * s} ${y - 10 * s} ${x - 12 * s} ${y - 7 * s} ${x - 10 * s} ${y} C${x - 8 * s} ${y + 6 * s} ${x} ${y + 10 * s} ${x} ${y + 10 * s} C${x} ${y + 10 * s} ${x + 8 * s} ${y + 6 * s} ${x + 10 * s} ${y} C${x + 12 * s} ${y - 7 * s} ${x + 3 * s} ${y - 10 * s} ${x} ${y - 3 * s} Z`
+
+const starPath = (cx: number, cy: number, r: number) => {
+  let d = ''
+  for (let k = 0; k < 10; k++) {
+    const rad = k % 2 ? r * 0.45 : r
+    const a = -Math.PI / 2 + (k * Math.PI) / 5
+    d += `${k ? 'L' : 'M'}${(cx + rad * Math.cos(a)).toFixed(1)} ${(cy + rad * Math.sin(a)).toFixed(1)} `
+  }
+  return d + 'Z'
+}
+
+/** Staggered points covering the skirt area; patterns are clipped to the dress outline. */
+const PATTERN_POINTS: [number, number][] = []
+for (let row = 0; row < 6; row++) {
+  for (let x = 30 + (row % 2) * 11; x <= 172; x += 22) PATTERN_POINTS.push([x, 160 + row * 18])
+}
+
+function patternFor(pattern: Pattern): ReactNode {
+  switch (pattern) {
+    case 'stars':
+      return PATTERN_POINTS.map(([x, y]) => <path key={`${x}-${y}`} d={sparkle(x, y, 6)} fill="#fff" fillOpacity=".95" />)
+    case 'dots':
+      return PATTERN_POINTS.map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r="4.5" fill="#fff" fillOpacity=".85" />)
+    case 'hearts':
+      return PATTERN_POINTS.map(([x, y]) => <path key={`${x}-${y}`} d={heartPath(x, y, 0.5)} fill="#fff" fillOpacity=".9" />)
+    case 'flowers':
+      return PATTERN_POINTS.map(([x, y]) => (
+        <g key={`${x}-${y}`}>
+          {[0, 72, 144, 216, 288].map((a) => (
+            <circle key={a} cx={x + 4 * Math.cos((a * Math.PI) / 180)} cy={y + 4 * Math.sin((a * Math.PI) / 180)} r="3" fill="#fff" fillOpacity=".9" />
+          ))}
+          <circle cx={x} cy={y} r="2.2" fill="#ffd447" />
+        </g>
+      ))
+    case 'stripes':
+      return Array.from({ length: 14 }, (_, k) => <rect key={k} x="0" y={150 + k * 9} width="200" height="4" fill="#fff" fillOpacity=".55" />)
+  }
+}
+
+interface DressParts {
+  /** Outline used to clip the pattern. */
+  clip: string
+  body: ReactNode
+}
+
+function dressParts(shape: string, c: string, fill: string, line: string): DressParts {
+  const stroke = { stroke: line, strokeWidth: 2.2, strokeLinejoin: 'round' as const }
+  const bodice = 'M76 144 L124 144 L120 188 L80 188 Z'
+  const puffSleeves = (
+    <>
+      <ellipse cx="70" cy="154" rx="14" ry="12" fill={fill} {...stroke} />
+      <ellipse cx="130" cy="154" rx="14" ry="12" fill={fill} {...stroke} />
+    </>
+  )
+  const ribbon = (y: number) => (
+    <>
+      <path d={`M78 ${y} Q100 ${y + 10} 122 ${y} L122 ${y + 8} Q100 ${y + 18} 78 ${y + 8} Z`} fill="#fff" fillOpacity=".75" />
+      <path d={heartPath(100, y + 6, 0.55)} fill={lighten(c, 0.5)} stroke={line} strokeWidth="1.5" />
+    </>
+  )
+  switch (shape) {
+    case 'ballgown': {
+      const skirt = `M80 184 L120 184 Q170 206 172 252${scallop(172, 28, 252, 8, 9)} Q30 206 80 184 Z`
+      return {
+        clip: skirt,
+        body: (
+          <>
+            <path d={skirt} fill={fill} {...stroke} />
+            <path d="M86 192 L114 192 Q148 214 150 246 L50 246 Q52 214 86 192 Z" fill="#fff" fillOpacity=".22" />
+            <path d={bodice} fill={fill} {...stroke} />
+            {puffSleeves}
+            {ribbon(182)}
+          </>
+        ),
+      }
+    }
+    case 'tiered': {
+      const t1 = `M78 184 L122 184 L132 208${scallop(132, 68, 208, 5, 7)} Z`
+      const t2 = `M70 204 L130 204 L144 230${scallop(144, 56, 230, 6, 7)} Z`
+      const t3 = `M58 226 L142 226 L158 254${scallop(158, 42, 254, 7, 8)} Z`
+      return {
+        clip: 'M76 144 L124 144 L122 184 L160 262 L40 262 L78 184 Z',
+        body: (
+          <>
+            <path d={t3} fill={lighten(c, 0.25)} {...stroke} />
+            <path d={t2} fill={fill} {...stroke} />
+            <path d={t1} fill={lighten(c, 0.25)} {...stroke} />
+            <path d={bodice} fill={fill} {...stroke} />
+            {ribbon(180)}
+          </>
+        ),
+      }
+    }
+    case 'tutu': {
+      let zig = 'M74 188 L126 188 L162 204'
+      for (let x = 162, k = 0; x >= 38; x -= 8, k++) zig += ` L${x} ${k % 2 ? 206 : 218}`
+      zig += ' Z'
+      return {
+        clip: zig,
+        body: (
+          <>
+            <path d={zig} transform="translate(0 -5)" fill={lighten(c, 0.45)} {...stroke} />
+            <path d={zig} fill={fill} {...stroke} />
+            <path d="M78 144 L122 144 L124 196 L76 196 Z" fill={fill} {...stroke} />
+            {ribbon(184)}
+          </>
+        ),
+      }
+    }
+    case 'puff': {
+      const d = 'M78 144 L122 144 L122 186 L146 246 L54 246 L78 186 Z'
+      return {
+        clip: d,
+        body: (
+          <>
+            <path d={d} fill={fill} {...stroke} />
+            {puffSleeves}
+            <ellipse cx="91" cy="149" rx="11" ry="7" fill="#fff" {...stroke} strokeWidth={1.6} />
+            <ellipse cx="109" cy="149" rx="11" ry="7" fill="#fff" {...stroke} strokeWidth={1.6} />
+            <path d="M56 240 L144 240" stroke="#fff" strokeWidth="5" strokeLinecap="round" />
+          </>
+        ),
+      }
+    }
+    case 'overall': {
+      const d = 'M84 158 L116 158 L116 186 L122 186 L140 242 L60 242 L78 186 L84 186 Z'
+      return {
+        clip: d,
+        body: (
+          <>
+            <path d="M74 144 L126 144 L140 176 L126 182 L126 196 L74 196 L74 182 L60 176 Z" fill="#fff" stroke="#c9b6e0" strokeWidth="2" strokeLinejoin="round" />
+            <path d={d} fill={fill} {...stroke} />
+            <path d="M86 158 L82 144 M114 158 L118 144" stroke={line} strokeWidth="8" strokeLinecap="round" />
+            <path d="M86 158 L82 144 M114 158 L118 144" stroke={c} strokeWidth="5" strokeLinecap="round" />
+            <circle cx="88" cy="163" r="3" fill="#ffd447" stroke={line} />
+            <circle cx="112" cy="163" r="3" fill="#ffd447" stroke={line} />
+            <rect x="92" y="168" width="16" height="12" rx="3" fill={lighten(c, 0.3)} stroke={line} strokeWidth="1.5" />
+          </>
+        ),
+      }
+    }
+    case 'aodai': {
+      const front = 'M78 144 L122 144 L124 198 L126 262 L74 262 L76 198 Z'
+      return {
+        clip: front,
+        body: (
+          <>
+            {/* white trousers */}
+            <path d="M80 204 L120 204 L121 262 L102 262 L100 232 L98 262 L79 262 Z" fill="#fff" stroke="#c9b6e0" strokeWidth="2" />
+            {/* back panels peeking out at the side slits */}
+            <path d="M76 198 L80 198 L72 262 L60 262 Z M124 198 L120 198 L128 262 L140 262 Z" fill={darken(c, 0.12)} {...stroke} />
+            {/* long sleeves */}
+            <line x1="76" y1="152" x2="60" y2="204" stroke={line} strokeWidth="15" strokeLinecap="round" />
+            <line x1="124" y1="152" x2="140" y2="204" stroke={line} strokeWidth="15" strokeLinecap="round" />
+            <line x1="76" y1="152" x2="60" y2="204" stroke={c} strokeWidth="11" strokeLinecap="round" />
+            <line x1="124" y1="152" x2="140" y2="204" stroke={c} strokeWidth="11" strokeLinecap="round" />
+            <path d={front} fill={fill} {...stroke} />
+            <rect x="89" y="130" width="22" height="12" rx="4" fill={fill} {...stroke} />
+            <path d="M100 144 Q112 150 124 148" stroke={line} strokeWidth="1.6" fill="none" />
+          </>
+        ),
+      }
+    }
+    default: {
+      const d: Record<string, string> = {
+        princess: 'M74 144 L126 144 L122 186 L166 258 L34 258 L78 186 Z',
+        aline: 'M74 144 L126 144 L122 192 L154 254 L46 254 L78 192 Z',
+        sundress: 'M82 144 L90 144 L100 158 L110 144 L118 144 L124 192 L150 250 L50 250 L76 192 Z',
+      }
+      const path = d[shape] ?? d.aline
+      return {
+        clip: path,
+        body: (
+          <>
+            <path d={path} fill={fill} {...stroke} />
+            <path d="M86 204 L68 252 M100 206 L100 254 M114 204 L132 252" stroke={line} strokeOpacity=".22" strokeWidth="2" fill="none" />
+            {ribbon(188)}
+          </>
+        ),
+      }
+    }
+  }
+}
 
 function layersFor(item: Item): Layer[] {
   const c = item.color
@@ -104,30 +301,20 @@ function layersFor(item: Item): Layer[] {
       return [[4, <g key="b">{defs}<P d={d[item.shape] ?? d.skirt} /></g>]]
     }
     case 'dress': {
-      const d: Record<string, string> = {
-        princess: 'M74 144 L126 144 L122 186 L166 258 L34 258 L78 186 Z',
-        aline: 'M74 144 L126 144 L122 192 L154 254 L46 254 L78 192 Z',
-        sundress: 'M82 144 L90 144 L100 158 L110 144 L118 144 L124 192 L150 250 L50 250 L76 192 Z',
-      }
+      const parts = dressParts(item.shape, c, fill, line)
+      const clipId = `c-${gid}`
       return [
         [
           6,
           <g key="d">
             {defs}
-            <P d={d[item.shape] ?? d.aline} />
-            <path d="M78 188 Q100 200 122 188 L122 196 Q100 208 78 196 Z" fill="#fff" fillOpacity=".7" />
-            <path d="M86 204 L68 252 M100 206 L100 254 M114 204 L132 252" stroke={line} strokeOpacity=".22" strokeWidth="2" fill="none" />
-            {item.shape === 'princess' && (
-              <g fill="#fff" fillOpacity=".95">
-                {[[58, 248], [92, 228], [140, 244], [148, 252], [114, 250], [74, 218], [128, 220]].map(([x, y]) => (
-                  <path key={`${x}-${y}`} d={sparkle(x, y, 7)} />
-                ))}
-              </g>
-            )}
-            {item.shape === 'sundress' &&
-              [[72, 240], [100, 226], [130, 240], [88, 210], [116, 210]].map(([x, y]) => (
-                <circle key={`${x}-${y}`} cx={x} cy={y} r="5" fill="#fff" fillOpacity=".8" />
-              ))}
+            <defs>
+              <clipPath id={clipId}>
+                <path d={parts.clip} />
+              </clipPath>
+            </defs>
+            {parts.body}
+            {item.pattern && <g clipPath={`url(#${clipId})`}>{patternFor(item.pattern)}</g>}
           </g>,
         ],
       ]
@@ -235,6 +422,68 @@ function layersFor(item: Item): Layer[] {
           </g>,
         ],
       ]
+    }
+    case 'lips': {
+      const lips =
+        item.shape === 'heart' ? (
+          <path d={heartPath(100, 130, 0.75)} fill={c} stroke={darken(c, 0.3)} strokeWidth="1.5" />
+        ) : (
+          <>
+            <path d="M89 127 Q100 142 111 127 Q105 131 100 129 Q95 131 89 127 Z" fill={c} stroke={darken(c, 0.3)} strokeWidth="1.5" strokeLinejoin="round" />
+            <ellipse cx="104" cy="133" rx="3" ry="1.6" fill="#fff" fillOpacity=".85" />
+          </>
+        )
+      return [[7.5, <g key="l">{lips}</g>]]
+    }
+    case 'blush': {
+      const cheeks =
+        item.shape === 'hearts'
+          ? [58, 142].map((x) => <path key={x} d={heartPath(x, 120, 0.85)} fill={c} fillOpacity=".75" />)
+          : [58, 142].map((x) => <ellipse key={x} cx={x} cy="121" rx="15" ry="9" fill={c} fillOpacity=".55" />)
+      return [[7.5, <g key="bl">{cheeks}</g>]]
+    }
+    case 'eyeshadow':
+      // A lid crescent sitting just above the lash line (face is z7).
+      return [
+        [
+          7.2,
+          <g key="es">
+            {[76, 124].map((x) => (
+              <g key={x}>
+                <path d={`M${x - 17} 96 Q${x} 66 ${x + 17} 96 L${x + 14} 96 Q${x} 82 ${x - 14} 96 Z`} fill={c} fillOpacity={item.shape === 'soft' ? 0.6 : 0.8} />
+                {item.shape === 'shimmer' && (
+                  <>
+                    <path d={sparkle(x - 8, 82, 3.5)} fill="#fff" />
+                    <path d={sparkle(x + 9, 86, 2.5)} fill="#fff" />
+                  </>
+                )}
+              </g>
+            ))}
+          </g>,
+        ],
+      ]
+    case 'sticker': {
+      const edge = darken(c, 0.35)
+      const m: Record<string, ReactNode> = {
+        star: <path d={starPath(146, 134, 9)} fill={c} stroke={edge} strokeWidth="1.5" strokeLinejoin="round" />,
+        heart: <path d={heartPath(58, 132, 0.7)} fill={c} stroke={edge} strokeWidth="1.2" />,
+        crown: <path d="M136 140 L137 128 L142 133 L146 125 L150 133 L155 128 L156 140 Z" fill={c} stroke={edge} strokeWidth="1.5" strokeLinejoin="round" />,
+        rainbow: (
+          <g fill="none" strokeWidth="3.2" strokeLinecap="round">
+            <path d="M44 140 Q58 120 72 140" stroke="#ff6b6b" />
+            <path d="M48 140 Q58 126 68 140" stroke="#ffd447" />
+            <path d="M52 140 Q58 132 64 140" stroke="#6cc8f5" />
+          </g>
+        ),
+        butterfly: (
+          <g>
+            <ellipse cx="139" cy="130" rx="7" ry="9" fill={c} fillOpacity=".85" transform="rotate(-25 139 130)" />
+            <ellipse cx="153" cy="130" rx="7" ry="9" fill={c} fillOpacity=".85" transform="rotate(25 153 130)" />
+            <ellipse cx="146" cy="132" rx="2" ry="7" fill={edge} />
+          </g>
+        ),
+      }
+      return [[7.6, <g key="st">{m[item.shape] ?? m.star}</g>]]
     }
     case 'back': {
       if (item.shape === 'wings')
@@ -359,10 +608,22 @@ const CROP: Record<Slot, string> = {
   dress: '20 134 160 150',
   shoes: '50 232 100 60',
   back: '0 110 200 130',
+  lips: '40 46 120 110',
+  blush: '40 46 120 110',
+  eyeshadow: '40 46 120 110',
+  sticker: '40 46 120 110',
 }
 
+const MAKEUP: Slot[] = ['lips', 'blush', 'eyeshadow', 'sticker']
+
 export function ItemThumb({ item, locked }: { item: Item; locked?: boolean }) {
-  const layers = layersFor(item).sort((a, b) => a[0] - b[0])
+  const layers = layersFor(item)
+  // Makeup only makes sense on a face, so show it on the doll's head.
+  if (MAKEUP.includes(item.slot)) {
+    const skin = THEMES.find((t) => t.id === item.theme)!.skin
+    layers.push(...BodyLayers({ skin, id: `thumb-${item.theme}` }).filter(([z]) => z >= 0))
+  }
+  layers.sort((a, b) => a[0] - b[0])
   return (
     <svg viewBox={CROP[item.slot]} className={locked ? 'thumb thumb-locked' : 'thumb'} aria-hidden="true">
       {layers.map(([z, node], i) => (

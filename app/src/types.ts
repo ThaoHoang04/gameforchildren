@@ -1,6 +1,20 @@
 export type ThemeId = 'princess' | 'fashion' | 'chibi'
 export type Subject = 'math' | 'viet'
-export type Slot = 'hair' | 'top' | 'bottom' | 'dress' | 'shoes' | 'head' | 'face' | 'back'
+export type Slot =
+  | 'hair'
+  | 'top'
+  | 'bottom'
+  | 'dress'
+  | 'shoes'
+  | 'head'
+  | 'face'
+  | 'back'
+  | 'lips'
+  | 'blush'
+  | 'eyeshadow'
+  | 'sticker'
+
+export type Pattern = 'stars' | 'dots' | 'hearts' | 'flowers' | 'stripes'
 
 export interface Question {
   id: string
@@ -22,6 +36,7 @@ export interface Item {
   shape: string
   color: string
   name: string
+  pattern?: Pattern
   /** Starter items are owned from the start (so the doll is never bald). */
   starter?: boolean
 }

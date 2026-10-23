@@ -1,16 +1,16 @@
-import type { Item, Slot, ThemeId } from '../types'
+import type { Item, Pattern, Slot, ThemeId } from '../types'
 
-type Row = [slot: Slot, shape: string, name: string, color: string, starter?: boolean]
+type Row = [slot: Slot, shape: string, name: string, color: string, opts?: { starter?: boolean; pattern?: Pattern }]
 
 const ROWS: Record<ThemeId, Row[]> = {
   princess: [
-    ['hair', 'long', 'Tóc dài nâu', '#8a5a3c', true],
+    ['hair', 'long', 'Tóc dài nâu', '#8a5a3c', { starter: true }],
     ['hair', 'pigtails', 'Tóc hai bím', '#f5c76b'],
     ['hair', 'bun', 'Tóc búi tím', '#b57edc'],
-    ['dress', 'princess', 'Váy công chúa hồng', '#ffb3d1'],
-    ['dress', 'princess', 'Váy lavender', '#c7a8ff'],
+    ['dress', 'princess', 'Váy công chúa hồng', '#ffb3d1', { pattern: 'stars' }],
+    ['dress', 'princess', 'Váy lavender', '#c7a8ff', { pattern: 'stars' }],
     ['dress', 'aline', 'Váy xanh băng giá', '#a8dcff'],
-    ['dress', 'sundress', 'Váy hoa vàng', '#ffe08a'],
+    ['dress', 'sundress', 'Váy hoa vàng', '#ffe08a', { pattern: 'flowers' }],
     ['top', 'tank', 'Áo hồng phấn', '#ffc2dc'],
     ['bottom', 'skirt', 'Chân váy tím', '#d3b5ff'],
     ['shoes', 'heels', 'Giày thủy tinh', '#bfe9ff'],
@@ -21,9 +21,21 @@ const ROWS: Record<ThemeId, Row[]> = {
     ['face', 'heartglasses', 'Kính trái tim', '#ff6fa5'],
     ['back', 'wings', 'Cánh tiên', '#d8f0ff'],
     ['back', 'wings', 'Cánh bướm tím', '#d9b8ff'],
+    // v2: more dresses + makeup
+    ['dress', 'ballgown', 'Đầm dạ hội hồng', '#ff9fcf', { pattern: 'stars' }],
+    ['dress', 'ballgown', 'Đầm dạ hội xanh', '#9fd4ff', { pattern: 'stars' }],
+    ['dress', 'tiered', 'Váy bèo ba tầng', '#d9b8ff', { pattern: 'hearts' }],
+    ['dress', 'puff', 'Váy tay phồng', '#ffc7a8', { pattern: 'flowers' }],
+    ['dress', 'aodai', 'Áo dài hồng', '#ff8fb8', { pattern: 'flowers' }],
+    ['lips', 'gloss', 'Son bóng hồng', '#ff6fa5'],
+    ['lips', 'heart', 'Son trái tim', '#e8456e'],
+    ['blush', 'hearts', 'Má hồng trái tim', '#ff7fa8'],
+    ['eyeshadow', 'shimmer', 'Phấn mắt tím lấp lánh', '#b57edc'],
+    ['sticker', 'star', 'Hình dán ngôi sao', '#ffd447'],
+    ['sticker', 'crown', 'Hình dán vương miện', '#ffcf3f'],
   ],
   fashion: [
-    ['hair', 'bob', 'Tóc bob đen', '#2f2a35', true],
+    ['hair', 'bob', 'Tóc bob đen', '#2f2a35', { starter: true }],
     ['hair', 'long', 'Tóc dài hạt dẻ', '#a0623a'],
     ['hair', 'ponytail', 'Tóc đuôi ngựa', '#d98a4a'],
     ['top', 'tee', 'Áo phông trắng', '#ffffff'],
@@ -33,7 +45,7 @@ const ROWS: Record<ThemeId, Row[]> = {
     ['bottom', 'skirt', 'Chân váy kem', '#f7e1b8'],
     ['bottom', 'pants', 'Quần jean', '#6f9bd6'],
     ['bottom', 'shorts', 'Quần short đào', '#ffa98c'],
-    ['dress', 'sundress', 'Đầm mint', '#98e0c6'],
+    ['dress', 'sundress', 'Đầm mint', '#98e0c6', { pattern: 'dots' }],
     ['dress', 'aline', 'Đầm đỏ cam', '#ff7f66'],
     ['shoes', 'sneakers', 'Sneaker trắng', '#ffffff'],
     ['shoes', 'sneakers', 'Sneaker hồng', '#ff9fb2'],
@@ -42,17 +54,27 @@ const ROWS: Record<ThemeId, Row[]> = {
     ['head', 'bow', 'Kẹp tóc nơ', '#ffcfa6'],
     ['face', 'glasses', 'Kính tròn', '#444444'],
     ['back', 'backpack', 'Balo mint', '#7ed9b8'],
+    // v2: more dresses + makeup
+    ['dress', 'overall', 'Váy yếm jean', '#6f9bd6'],
+    ['dress', 'puff', 'Váy tay phồng kẻ sọc', '#ff9a8a', { pattern: 'stripes' }],
+    ['dress', 'tiered', 'Váy bèo kem', '#f7e1b8', { pattern: 'dots' }],
+    ['dress', 'aodai', 'Áo dài xanh ngọc', '#5ccfb4', { pattern: 'flowers' }],
+    ['lips', 'gloss', 'Son đỏ dâu', '#e0455f'],
+    ['lips', 'gloss', 'Son cam đào', '#ff8a6b'],
+    ['blush', 'round', 'Má hồng đào', '#ff9a7a'],
+    ['eyeshadow', 'soft', 'Phấn mắt nâu', '#c48a6a'],
+    ['sticker', 'heart', 'Hình dán trái tim', '#ff5f9d'],
   ],
   chibi: [
-    ['hair', 'pigtails', 'Hai bím hồng', '#ff8fc0', true],
+    ['hair', 'pigtails', 'Hai bím hồng', '#ff8fc0', { starter: true }],
     ['hair', 'bun', 'Búi tóc xanh', '#68c8f2'],
     ['hair', 'bob', 'Tóc bob vàng', '#ffd35c'],
     ['top', 'tee', 'Áo phông kẹo', '#ffd1e6'],
     ['top', 'jacket', 'Áo khoác xanh', '#8fd8ff'],
     ['bottom', 'shorts', 'Quần short tím', '#c4a4ff'],
     ['bottom', 'skirt', 'Váy bông vàng', '#ffe58a'],
-    ['dress', 'princess', 'Váy kẹo hồng', '#ff9ccc'],
-    ['dress', 'sundress', 'Váy dâu', '#ff8080'],
+    ['dress', 'princess', 'Váy kẹo hồng', '#ff9ccc', { pattern: 'hearts' }],
+    ['dress', 'sundress', 'Váy dâu', '#ff8080', { pattern: 'dots' }],
     ['shoes', 'sneakers', 'Giày xanh', '#6cc8f5'],
     ['shoes', 'boots', 'Bốt vàng', '#ffd35c'],
     ['head', 'catears', 'Tai mèo', '#ffffff'],
@@ -61,18 +83,31 @@ const ROWS: Record<ThemeId, Row[]> = {
     ['face', 'heartglasses', 'Kính ngôi sao', '#ffb300'],
     ['back', 'backpack', 'Balo thú cưng', '#ffb7d5'],
     ['back', 'tail', 'Đuôi mèo', '#ffffff'],
+    // v2: more dresses + makeup
+    ['dress', 'tutu', 'Váy tutu ba lê', '#ffb3d9', { pattern: 'stars' }],
+    ['dress', 'overall', 'Váy yếm vàng', '#ffd35c', { pattern: 'hearts' }],
+    ['dress', 'ballgown', 'Đầm kẹo bông', '#c4a4ff', { pattern: 'hearts' }],
+    ['dress', 'puff', 'Váy tay phồng xanh', '#8fd8ff', { pattern: 'dots' }],
+    ['dress', 'tiered', 'Váy cầu vồng', '#ffb27f', { pattern: 'stripes' }],
+    ['lips', 'heart', 'Son tim tím', '#b06ae0'],
+    ['blush', 'round', 'Má hồng kẹo', '#ff8fc0'],
+    ['blush', 'hearts', 'Má trái tim xanh', '#6cc8f5'],
+    ['eyeshadow', 'shimmer', 'Phấn mắt xanh lấp lánh', '#6cc8f5'],
+    ['sticker', 'rainbow', 'Vẽ mặt cầu vồng', '#ff6b6b'],
+    ['sticker', 'butterfly', 'Vẽ mặt bướm', '#c06ce0'],
   ],
 }
 
 export const ITEMS: Item[] = (Object.keys(ROWS) as ThemeId[]).flatMap((theme) =>
-  ROWS[theme].map(([slot, shape, name, color, starter], i) => ({
+  ROWS[theme].map(([slot, shape, name, color, opts], i) => ({
     id: `${theme}_${slot}_${shape}_${i + 1}`,
     theme,
     slot,
     shape,
     color,
     name,
-    starter,
+    starter: opts?.starter,
+    pattern: opts?.pattern,
   })),
 )
 
@@ -80,5 +115,7 @@ export const ITEM_BY_ID: Record<string, Item> = Object.fromEntries(ITEMS.map((i)
 
 export const STARTER_IDS = ITEMS.filter((i) => i.starter).map((i) => i.id)
 
-export const itemsFor = (theme: ThemeId, slot?: Slot) =>
-  ITEMS.filter((i) => i.theme === theme && (!slot || i.slot === slot))
+export const itemsFor = (theme: ThemeId, slots?: Slot | Slot[]) => {
+  const want = slots === undefined ? null : Array.isArray(slots) ? slots : [slots]
+  return ITEMS.filter((i) => i.theme === theme && (!want || want.includes(i.slot)))
+}

@@ -129,6 +129,19 @@ describe('items & save', () => {
     expect(new Set(ITEMS.map((i) => i.id)).size).toBe(ITEMS.length)
   })
 
+  it('each theme has plenty of dresses and makeup', () => {
+    for (const t of ['princess', 'fashion', 'chibi'] as const) {
+      expect(itemsFor(t, 'dress').length).toBeGreaterThanOrEqual(6)
+      expect(itemsFor(t, ['lips', 'blush', 'eyeshadow', 'sticker']).length).toBeGreaterThanOrEqual(5)
+    }
+  })
+
+  it('makeup slots stack: lipstick does not remove blush', () => {
+    const lips = ITEMS.find((i) => i.slot === 'lips')!
+    const blush = ITEMS.find((i) => i.slot === 'blush')!
+    expect(equip(equip({}, blush), lips)).toEqual({ blush: blush.id, lips: lips.id })
+  })
+
   it('round-trips a save and keeps unlocked items', () => {
     const save = freshSave()
     const id = ITEMS.find((i) => !i.starter)!.id
