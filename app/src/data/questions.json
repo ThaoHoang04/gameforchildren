@@ -484,479 +484,654 @@
   "subject": "viet",
   "stage": "letters",
   "type": "multiple_choice",
-  "emoji": "🐟",
-  "prompt": "Chữ cái đầu của từ \"cá\" là gì?",
+  "emoji": "👂",
+  "prompt": "Tranh nào có tên bắt đầu bằng âm \"c\"?",
+  "speech": "Con nghe nhé. Cờ, cờ, cờ. Tranh nào có tên bắt đầu bằng âm cờ?",
   "choices": [
-   "c",
-   "b",
-   "d"
+   "cá",
+   "mèo",
+   "gà"
   ],
-  "answer": "c",
-  "hint": "Đọc chậm: cờ - á.",
-  "explanation": "Từ \"cá\" bắt đầu bằng chữ c."
+  "visuals": {
+   "cá": "🐟",
+   "mèo": "🐱",
+   "gà": "🐔"
+  },
+  "answer": "cá",
+  "hint": "Nghe thật kỹ nhé. Cờ, cờ, cá.",
+  "explanation": "Cá. Cờ, cá. Con cá bắt đầu bằng âm cờ."
  },
  {
   "id": "viet_002",
   "subject": "viet",
   "stage": "letters",
   "type": "multiple_choice",
-  "emoji": "🐱",
-  "prompt": "Chữ cái đầu của từ \"mèo\" là gì?",
+  "emoji": "👂",
+  "prompt": "Tranh nào có tên bắt đầu bằng âm \"m\"?",
+  "speech": "Con nghe nhé. Mờ, mờ, mờ. Tranh nào có tên bắt đầu bằng âm mờ?",
   "choices": [
-   "m",
-   "n",
-   "t"
+   "mèo",
+   "cá",
+   "voi"
   ],
-  "answer": "m",
-  "hint": "Đọc chậm: mờ - èo.",
-  "explanation": "Từ \"mèo\" bắt đầu bằng chữ m."
+  "visuals": {
+   "mèo": "🐱",
+   "cá": "🐟",
+   "voi": "🐘"
+  },
+  "answer": "mèo",
+  "hint": "Nghe thật kỹ nhé. Mờ, mờ, mèo.",
+  "explanation": "Mèo. Mờ, mèo. Con mèo bắt đầu bằng âm mờ."
  },
  {
   "id": "viet_003",
   "subject": "viet",
   "stage": "letters",
   "type": "multiple_choice",
-  "emoji": "🐔",
-  "prompt": "Chữ cái đầu của từ \"gà\" là gì?",
+  "emoji": "👂",
+  "prompt": "Tranh nào có tên bắt đầu bằng âm \"g\"?",
+  "speech": "Con nghe nhé. Gờ, gờ, gờ. Tranh nào có tên bắt đầu bằng âm gờ?",
   "choices": [
-   "g",
-   "d",
-   "q"
+   "gà",
+   "mèo",
+   "thỏ"
   ],
-  "answer": "g",
-  "hint": "Đọc chậm: gờ - à.",
-  "explanation": "Từ \"gà\" bắt đầu bằng chữ g."
+  "visuals": {
+   "gà": "🐔",
+   "mèo": "🐱",
+   "thỏ": "🐰"
+  },
+  "answer": "gà",
+  "hint": "Nghe thật kỹ nhé. Gờ, gờ, gà.",
+  "explanation": "Gà. Gờ, gà. Con gà bắt đầu bằng âm gờ."
  },
  {
   "id": "viet_004",
   "subject": "viet",
   "stage": "letters",
   "type": "multiple_choice",
-  "emoji": "🏠",
-  "prompt": "Từ \"nhà\" bắt đầu bằng chữ ghép nào?",
+  "emoji": "👂",
+  "prompt": "Tranh nào có tên bắt đầu bằng âm \"nh\"?",
+  "speech": "Con nghe nhé. Nhờ, nhờ, nhờ. Tranh nào có tên bắt đầu bằng âm nhờ?",
   "choices": [
-   "nh",
-   "ng",
-   "ch"
+   "nhà",
+   "cá",
+   "bò"
   ],
-  "answer": "nh",
-  "hint": "Đọc chậm: nhờ - à.",
-  "explanation": "Từ \"nhà\" bắt đầu bằng nh."
+  "visuals": {
+   "nhà": "🏠",
+   "cá": "🐟",
+   "bò": "🐮"
+  },
+  "answer": "nhà",
+  "hint": "Nghe thật kỹ nhé. Nhờ, nhờ, nhà.",
+  "explanation": "Nhà. Nhờ, nhà. Ngôi nhà bắt đầu bằng âm nhờ."
  },
  {
   "id": "viet_005",
   "subject": "viet",
   "stage": "letters",
   "type": "multiple_choice",
-  "emoji": "🌙",
-  "prompt": "Từ \"trăng\" bắt đầu bằng chữ ghép nào?",
+  "emoji": "👂",
+  "prompt": "Tranh nào có tên bắt đầu bằng âm \"tr\"?",
+  "speech": "Con nghe nhé. Trờ, trờ, trờ. Tranh nào có tên bắt đầu bằng âm trờ?",
   "choices": [
-   "tr",
-   "ch",
-   "th"
+   "trăng",
+   "cam",
+   "nho"
   ],
-  "answer": "tr",
-  "hint": "Đọc chậm: trờ - ăng.",
-  "explanation": "Từ \"trăng\" bắt đầu bằng tr."
+  "visuals": {
+   "trăng": "🌙",
+   "cam": "🍊",
+   "nho": "🍇"
+  },
+  "answer": "trăng",
+  "hint": "Nghe thật kỹ nhé. Trờ, trờ, trăng.",
+  "explanation": "Trăng. Trờ, trăng. Mặt trăng bắt đầu bằng âm trờ."
  },
  {
   "id": "viet_006",
   "subject": "viet",
   "stage": "letters",
   "type": "multiple_choice",
-  "emoji": "🐘",
-  "prompt": "Chữ cái đầu của từ \"voi\" là gì?",
+  "emoji": "👂",
+  "prompt": "Tranh nào có tên bắt đầu bằng âm \"v\"?",
+  "speech": "Con nghe nhé. Vờ, vờ, vờ. Tranh nào có tên bắt đầu bằng âm vờ?",
   "choices": [
-   "v",
-   "r",
-   "x"
+   "voi",
+   "cá",
+   "táo"
   ],
-  "answer": "v",
-  "hint": "Đọc chậm: vờ - oi.",
-  "explanation": "Từ \"voi\" bắt đầu bằng chữ v."
+  "visuals": {
+   "voi": "🐘",
+   "cá": "🐟",
+   "táo": "🍎"
+  },
+  "answer": "voi",
+  "hint": "Nghe thật kỹ nhé. Vờ, vờ, voi.",
+  "explanation": "Voi. Vờ, voi. Con voi bắt đầu bằng âm vờ."
  },
  {
   "id": "viet_007",
   "subject": "viet",
   "stage": "letters",
   "type": "multiple_choice",
-  "emoji": "🐶",
-  "prompt": "Từ \"chó\" bắt đầu bằng chữ ghép nào?",
+  "emoji": "👂",
+  "prompt": "Tranh nào có tên bắt đầu bằng âm \"ch\"?",
+  "speech": "Con nghe nhé. Chờ, chờ, chờ. Tranh nào có tên bắt đầu bằng âm chờ?",
   "choices": [
-   "ch",
-   "tr",
-   "kh"
+   "chó",
+   "gà",
+   "cá"
   ],
-  "answer": "ch",
-  "hint": "Đọc chậm: chờ - ó.",
-  "explanation": "Từ \"chó\" bắt đầu bằng ch."
+  "visuals": {
+   "chó": "🐶",
+   "gà": "🐔",
+   "cá": "🐟"
+  },
+  "answer": "chó",
+  "hint": "Nghe thật kỹ nhé. Chờ, chờ, chó.",
+  "explanation": "Chó. Chờ, chó. Con chó bắt đầu bằng âm chờ."
  },
  {
   "id": "viet_008",
   "subject": "viet",
   "stage": "letters",
   "type": "multiple_choice",
-  "emoji": "🍎",
-  "prompt": "Chữ cái đầu của từ \"táo\" là gì?",
+  "emoji": "👂",
+  "prompt": "Tranh nào có tên bắt đầu bằng âm \"t\"?",
+  "speech": "Con nghe nhé. Tờ, tờ, tờ. Tranh nào có tên bắt đầu bằng âm tờ?",
   "choices": [
-   "t",
-   "đ",
-   "d"
+   "táo",
+   "mèo",
+   "nhà"
   ],
-  "answer": "t",
-  "hint": "Đọc chậm: tờ - áo.",
-  "explanation": "Từ \"táo\" bắt đầu bằng chữ t."
+  "visuals": {
+   "táo": "🍎",
+   "mèo": "🐱",
+   "nhà": "🏠"
+  },
+  "answer": "táo",
+  "hint": "Nghe thật kỹ nhé. Tờ, tờ, táo.",
+  "explanation": "Táo. Tờ, táo. Quả táo bắt đầu bằng âm tờ."
  },
  {
   "id": "viet_009",
   "subject": "viet",
   "stage": "letters",
   "type": "multiple_choice",
-  "emoji": "🐰",
-  "prompt": "Từ \"thỏ\" bắt đầu bằng chữ ghép nào?",
+  "emoji": "👂",
+  "prompt": "Tranh nào có tên bắt đầu bằng âm \"th\"?",
+  "speech": "Con nghe nhé. Thờ, thờ, thờ. Tranh nào có tên bắt đầu bằng âm thờ?",
   "choices": [
-   "th",
-   "tr",
-   "kh"
+   "thỏ",
+   "voi",
+   "gà"
   ],
-  "answer": "th",
-  "hint": "Đọc chậm: thờ - ỏ.",
-  "explanation": "Từ \"thỏ\" bắt đầu bằng th."
+  "visuals": {
+   "thỏ": "🐰",
+   "voi": "🐘",
+   "gà": "🐔"
+  },
+  "answer": "thỏ",
+  "hint": "Nghe thật kỹ nhé. Thờ, thờ, thỏ.",
+  "explanation": "Thỏ. Thờ, thỏ. Con thỏ bắt đầu bằng âm thờ."
  },
  {
   "id": "viet_010",
   "subject": "viet",
   "stage": "letters",
   "type": "multiple_choice",
-  "emoji": "⭐",
-  "prompt": "Chữ cái đầu của từ \"sao\" là gì?",
+  "emoji": "👂",
+  "prompt": "Tranh nào có tên bắt đầu bằng âm \"s\"?",
+  "speech": "Con nghe nhé. Sờ, sờ, sờ. Tranh nào có tên bắt đầu bằng âm sờ?",
   "choices": [
-   "s",
-   "x",
-   "c"
+   "sao",
+   "mèo",
+   "nhà"
   ],
-  "answer": "s",
-  "hint": "Đọc chậm: sờ - ao.",
-  "explanation": "Từ \"sao\" bắt đầu bằng chữ s."
+  "visuals": {
+   "sao": "⭐",
+   "mèo": "🐱",
+   "nhà": "🏠"
+  },
+  "answer": "sao",
+  "hint": "Nghe thật kỹ nhé. Sờ, sờ, sao.",
+  "explanation": "Sao. Sờ, sao. Ngôi sao bắt đầu bằng âm sờ."
  },
  {
   "id": "viet_011",
   "subject": "viet",
   "stage": "rhymes",
   "type": "multiple_choice",
-  "emoji": "🪑",
-  "prompt": "Tiếng nào có vần \"an\"?",
+  "emoji": "🎵",
+  "prompt": "Tranh nào có vần \"ao\"?",
+  "speech": "Con nghe nhé. Vần ao. Tranh nào có vần ao?",
   "choices": [
-   "bàn",
-   "bố",
-   "cá"
+   "sao",
+   "cá",
+   "nhà"
   ],
-  "answer": "bàn",
-  "hint": "Đọc to: b-àn. Nghe thấy \"an\" ở cuối.",
-  "explanation": "Tiếng \"bàn\" có vần an."
+  "visuals": {
+   "sao": "⭐",
+   "cá": "🐟",
+   "nhà": "🏠"
+  },
+  "answer": "sao",
+  "hint": "Nghe thật kỹ phần cuối nhé. S, ao. Sao.",
+  "explanation": "Sao. Sao có vần ao."
  },
  {
   "id": "viet_012",
   "subject": "viet",
   "stage": "rhymes",
   "type": "multiple_choice",
-  "emoji": "🐶",
-  "prompt": "Tiếng nào có vần \"on\"?",
+  "emoji": "🎵",
+  "prompt": "Tranh nào có vần \"eo\"?",
+  "speech": "Con nghe nhé. Vần eo. Tranh nào có vần eo?",
   "choices": [
-   "con",
-   "bà",
-   "cô"
+   "mèo",
+   "sao",
+   "cá"
   ],
-  "answer": "con",
-  "hint": "Đọc to: c-on. Nghe thấy \"on\" ở cuối.",
-  "explanation": "Tiếng \"con\" có vần on."
+  "visuals": {
+   "mèo": "🐱",
+   "sao": "⭐",
+   "cá": "🐟"
+  },
+  "answer": "mèo",
+  "hint": "Nghe thật kỹ phần cuối nhé. M, eo. Mèo.",
+  "explanation": "Mèo. Mèo có vần eo."
  },
  {
   "id": "viet_013",
   "subject": "viet",
   "stage": "rhymes",
   "type": "multiple_choice",
-  "emoji": "⭐",
-  "prompt": "Tiếng nào có vần \"ao\"?",
+  "emoji": "🎵",
+  "prompt": "Tranh nào có vần \"oa\"?",
+  "speech": "Con nghe nhé. Vần oa. Tranh nào có vần oa?",
   "choices": [
-   "sao",
-   "bé",
-   "đi"
+   "hoa",
+   "cá",
+   "sao"
   ],
-  "answer": "sao",
-  "hint": "Đọc to: s-ao. Nghe thấy \"ao\" ở cuối.",
-  "explanation": "Tiếng \"sao\" có vần ao."
+  "visuals": {
+   "hoa": "🌸",
+   "cá": "🐟",
+   "sao": "⭐"
+  },
+  "answer": "hoa",
+  "hint": "Nghe thật kỹ phần cuối nhé. H, oa. Hoa.",
+  "explanation": "Hoa. Hoa có vần oa."
  },
  {
   "id": "viet_014",
   "subject": "viet",
   "stage": "rhymes",
   "type": "multiple_choice",
-  "emoji": "🎋",
-  "prompt": "Tiếng nào có vần \"ia\"?",
+  "emoji": "🎵",
+  "prompt": "Tranh nào có vần \"ay\"?",
+  "speech": "Con nghe nhé. Vần ay. Tranh nào có vần ay?",
   "choices": [
-   "mía",
-   "mẹ",
-   "mũ"
+   "tay",
+   "mèo",
+   "sao"
   ],
-  "answer": "mía",
-  "hint": "Đọc to: m-ía. Nghe thấy \"ia\" ở cuối.",
-  "explanation": "Tiếng \"mía\" có vần ia."
+  "visuals": {
+   "tay": "✋",
+   "mèo": "🐱",
+   "sao": "⭐"
+  },
+  "answer": "tay",
+  "hint": "Nghe thật kỹ phần cuối nhé. T, ay. Tay.",
+  "explanation": "Tay. Tay có vần ay."
  },
  {
   "id": "viet_015",
   "subject": "viet",
   "stage": "rhymes",
   "type": "multiple_choice",
-  "emoji": "🌸",
-  "prompt": "Tiếng nào có vần \"oa\"?",
+  "emoji": "🎵",
+  "prompt": "Tranh nào có vần \"ai\"?",
+  "speech": "Con nghe nhé. Vần ai. Tranh nào có vần ai?",
   "choices": [
-   "hoa",
-   "hồ",
-   "hè"
+   "tai",
+   "sao",
+   "cá"
   ],
-  "answer": "hoa",
-  "hint": "Đọc to: h-oa. Nghe thấy \"oa\" ở cuối.",
-  "explanation": "Tiếng \"hoa\" có vần oa."
+  "visuals": {
+   "tai": "👂",
+   "sao": "⭐",
+   "cá": "🐟"
+  },
+  "answer": "tai",
+  "hint": "Nghe thật kỹ phần cuối nhé. T, ai. Tai.",
+  "explanation": "Tai. Tai có vần ai."
  },
  {
   "id": "viet_016",
   "subject": "viet",
   "stage": "rhymes",
   "type": "multiple_choice",
-  "emoji": "✌️",
-  "prompt": "Tiếng nào có vần \"ai\"?",
+  "emoji": "🎵",
+  "prompt": "Tranh nào có vần \"ui\"?",
+  "speech": "Con nghe nhé. Vần ui. Tranh nào có vần ui?",
   "choices": [
-   "hai",
-   "hồ",
-   "hè"
+   "mũi",
+   "mèo",
+   "sao"
   ],
-  "answer": "hai",
-  "hint": "Đọc to: h-ai. Nghe thấy \"ai\" ở cuối.",
-  "explanation": "Tiếng \"hai\" có vần ai."
+  "visuals": {
+   "mũi": "👃",
+   "mèo": "🐱",
+   "sao": "⭐"
+  },
+  "answer": "mũi",
+  "hint": "Nghe thật kỹ phần cuối nhé. M, ui. Mũi.",
+  "explanation": "Mũi. Mũi có vần ui."
  },
  {
   "id": "viet_017",
   "subject": "viet",
   "stage": "rhymes",
   "type": "multiple_choice",
-  "emoji": "✋",
-  "prompt": "Tiếng nào có vần \"ay\"?",
+  "emoji": "🎵",
+  "prompt": "Tranh nào có vần \"ưa\"?",
+  "speech": "Con nghe nhé. Vần ưa. Tranh nào có vần ưa?",
   "choices": [
-   "tay",
-   "tơ",
-   "tư"
+   "ngựa",
+   "cá",
+   "mèo"
   ],
-  "answer": "tay",
-  "hint": "Đọc to: t-ay. Nghe thấy \"ay\" ở cuối.",
-  "explanation": "Tiếng \"tay\" có vần ay."
+  "visuals": {
+   "ngựa": "🐴",
+   "cá": "🐟",
+   "mèo": "🐱"
+  },
+  "answer": "ngựa",
+  "hint": "Nghe thật kỹ phần cuối nhé. Ng, ưa. Ngựa.",
+  "explanation": "Ngựa. Ngựa có vần ưa."
  },
  {
   "id": "viet_018",
   "subject": "viet",
   "stage": "rhymes",
   "type": "multiple_choice",
-  "emoji": "🐱",
-  "prompt": "Tiếng nào có vần \"eo\"?",
+  "emoji": "🎵",
+  "prompt": "Tranh nào có vần \"oi\"?",
+  "speech": "Con nghe nhé. Vần oi. Tranh nào có vần oi?",
   "choices": [
+   "voi",
    "mèo",
-   "bà",
-   "cá"
+   "sao"
   ],
-  "answer": "mèo",
-  "hint": "Đọc to: m-èo. Nghe thấy \"eo\" ở cuối.",
-  "explanation": "Tiếng \"mèo\" có vần eo."
+  "visuals": {
+   "voi": "🐘",
+   "mèo": "🐱",
+   "sao": "⭐"
+  },
+  "answer": "voi",
+  "hint": "Nghe thật kỹ phần cuối nhé. V, oi. Voi.",
+  "explanation": "Voi. Voi có vần oi."
  },
  {
   "id": "viet_019",
   "subject": "viet",
   "stage": "rhymes",
   "type": "multiple_choice",
-  "emoji": "🍚",
-  "prompt": "Tiếng nào có vần \"ôi\"?",
+  "emoji": "🎵",
+  "prompt": "Tranh nào có vần \"im\"?",
+  "speech": "Con nghe nhé. Vần im. Tranh nào có vần im?",
   "choices": [
-   "xôi",
-   "bàn",
+   "chim",
+   "cá",
    "sao"
   ],
-  "answer": "xôi",
-  "hint": "Đọc to: x-ôi. Nghe thấy \"ôi\" ở cuối.",
-  "explanation": "Tiếng \"xôi\" có vần ôi."
+  "visuals": {
+   "chim": "🐦",
+   "cá": "🐟",
+   "sao": "⭐"
+  },
+  "answer": "chim",
+  "hint": "Nghe thật kỹ phần cuối nhé. Ch, im. Chim.",
+  "explanation": "Chim. Chim có vần im."
  },
  {
   "id": "viet_020",
   "subject": "viet",
   "stage": "rhymes",
   "type": "multiple_choice",
-  "emoji": "🐮",
-  "prompt": "Tiếng nào có vần \"ê\"?",
+  "emoji": "🎵",
+  "prompt": "Tranh nào có vần \"a\"?",
+  "speech": "Con nghe nhé. Vần a. Tranh nào có vần a?",
   "choices": [
-   "bê",
-   "bò",
-   "bà"
+   "cá",
+   "sao",
+   "mèo"
   ],
-  "answer": "bê",
-  "hint": "Đọc to: b-ê. Nghe thấy \"ê\" ở cuối.",
-  "explanation": "Tiếng \"bê\" có vần ê."
+  "visuals": {
+   "cá": "🐟",
+   "sao": "⭐",
+   "mèo": "🐱"
+  },
+  "answer": "cá",
+  "hint": "Nghe thật kỹ phần cuối nhé. C, a. Cá.",
+  "explanation": "Cá. Cá có vần a."
  },
  {
   "id": "viet_021",
   "subject": "viet",
   "stage": "words",
   "type": "multiple_choice",
-  "emoji": "🐶",
-  "prompt": "Từ nào chỉ con vật?",
+  "emoji": "❓",
+  "prompt": "Con vật nào biết bay?",
+  "speech": "Con nghe câu hỏi nhé. Con vật nào biết bay?",
   "choices": [
+   "chim",
    "chó",
-   "bàn",
-   "ghế"
+   "cá"
   ],
-  "answer": "chó",
-  "hint": "Con vật biết chạy, bay hoặc bơi.",
-  "explanation": "\"Chó\" là một con vật."
+  "visuals": {
+   "chim": "🐦",
+   "chó": "🐶",
+   "cá": "🐟"
+  },
+  "answer": "chim",
+  "hint": "Con vật nào có cánh để bay trên trời?",
+  "explanation": "Chim biết bay trên trời."
  },
  {
   "id": "viet_022",
   "subject": "viet",
   "stage": "words",
   "type": "multiple_choice",
-  "emoji": "🪑",
-  "prompt": "Từ nào chỉ đồ vật?",
+  "emoji": "❓",
+  "prompt": "Con vật nào sống dưới nước?",
+  "speech": "Con nghe câu hỏi nhé. Con vật nào sống ở dưới nước?",
   "choices": [
-   "ghế",
-   "mèo",
-   "gà"
+   "cá",
+   "gà",
+   "mèo"
   ],
-  "answer": "ghế",
-  "hint": "Đồ vật là thứ ta dùng, không phải con vật.",
-  "explanation": "\"Ghế\" là đồ vật."
+  "visuals": {
+   "cá": "🐟",
+   "gà": "🐔",
+   "mèo": "🐱"
+  },
+  "answer": "cá",
+  "hint": "Con vật nào biết bơi trong nước?",
+  "explanation": "Cá sống dưới nước."
  },
  {
   "id": "viet_023",
   "subject": "viet",
   "stage": "words",
   "type": "multiple_choice",
-  "emoji": "🍎",
-  "prompt": "Từ nào chỉ một loại quả?",
+  "emoji": "❓",
+  "prompt": "Quả nào có màu vàng?",
+  "speech": "Con nghe câu hỏi nhé. Quả nào có màu vàng?",
   "choices": [
-   "táo",
-   "bàn",
-   "cá"
+   "chuối",
+   "dâu",
+   "nho"
   ],
-  "answer": "táo",
-  "hint": "Quả là thứ ta ăn được, mọc trên cây.",
-  "explanation": "\"Táo\" là một loại quả."
+  "visuals": {
+   "chuối": "🍌",
+   "dâu": "🍓",
+   "nho": "🍇"
+  },
+  "answer": "chuối",
+  "hint": "Quả chuối chín có màu gì nhỉ?",
+  "explanation": "Quả chuối chín có màu vàng."
  },
  {
   "id": "viet_024",
   "subject": "viet",
   "stage": "words",
   "type": "multiple_choice",
-  "emoji": "👴",
-  "prompt": "Từ nào chỉ người thân trong gia đình?",
+  "emoji": "❓",
+  "prompt": "Đâu là quả có màu đỏ?",
+  "speech": "Con nghe câu hỏi nhé. Quả nào có màu đỏ?",
   "choices": [
-   "ông",
-   "bút",
-   "vở"
+   "dâu",
+   "chuối",
+   "nho"
   ],
-  "answer": "ông",
-  "hint": "Người thân là những người như bà, mẹ, bố...",
-  "explanation": "\"Ông\" là người thân."
+  "visuals": {
+   "dâu": "🍓",
+   "chuối": "🍌",
+   "nho": "🍇"
+  },
+  "answer": "dâu",
+  "hint": "Quả dâu tây chín có màu gì nhỉ?",
+  "explanation": "Quả dâu chín có màu đỏ."
  },
  {
   "id": "viet_025",
   "subject": "viet",
   "stage": "words",
   "type": "multiple_choice",
-  "emoji": "🎨",
-  "prompt": "Từ nào chỉ màu sắc?",
+  "emoji": "❓",
+  "prompt": "Bé dùng gì để viết?",
+  "speech": "Con nghe câu hỏi nhé. Bé dùng gì để viết chữ?",
   "choices": [
-   "đỏ",
-   "mẹ",
-   "bé"
+   "bút",
+   "bóng",
+   "kem"
   ],
-  "answer": "đỏ",
-  "hint": "Màu sắc như xanh, vàng...",
-  "explanation": "\"Đỏ\" là màu sắc."
+  "visuals": {
+   "bút": "✏️",
+   "bóng": "⚽",
+   "kem": "🍦"
+  },
+  "answer": "bút",
+  "hint": "Bé cầm vật gì để viết chữ?",
+  "explanation": "Bé dùng cây bút để viết."
  },
  {
   "id": "viet_026",
   "subject": "viet",
   "stage": "words",
   "type": "multiple_choice",
-  "emoji": "📚",
-  "prompt": "Bé ... bài. Chọn từ điền vào chỗ trống.",
+  "emoji": "❓",
+  "prompt": "Bé dùng gì để nghe?",
+  "speech": "Con nghe câu hỏi nhé. Bé dùng gì để nghe âm thanh?",
   "choices": [
-   "học",
-   "ngủ",
-   "ăn"
+   "tai",
+   "mắt",
+   "mũi"
   ],
-  "answer": "học",
-  "hint": "Bé làm gì với bài ở lớp?",
-  "explanation": "\"Bé học bài\" là câu đúng."
+  "visuals": {
+   "tai": "👂",
+   "mắt": "👁️",
+   "mũi": "👃"
+  },
+  "answer": "tai",
+  "hint": "Bé nghe được là nhờ bộ phận nào?",
+  "explanation": "Bé nghe bằng đôi tai."
  },
  {
   "id": "viet_027",
   "subject": "viet",
   "stage": "words",
   "type": "multiple_choice",
-  "emoji": "🐱",
-  "prompt": "Có mấy tiếng trong \"con mèo\"?",
+  "emoji": "❓",
+  "prompt": "Bé dùng gì để nhìn?",
+  "speech": "Con nghe câu hỏi nhé. Bé dùng gì để nhìn?",
   "choices": [
-   "2",
-   "1",
-   "3"
+   "mắt",
+   "tai",
+   "miệng"
   ],
-  "answer": "2",
-  "hint": "Vỗ tay theo từng tiếng: con - mèo.",
-  "explanation": "\"Con mèo\" có hai tiếng."
+  "visuals": {
+   "mắt": "👁️",
+   "tai": "👂",
+   "miệng": "👄"
+  },
+  "answer": "mắt",
+  "hint": "Bé nhìn thấy mọi thứ nhờ bộ phận nào?",
+  "explanation": "Bé nhìn bằng đôi mắt."
  },
  {
   "id": "viet_028",
   "subject": "viet",
   "stage": "words",
   "type": "multiple_choice",
-  "emoji": "📖",
-  "prompt": "Có mấy tiếng trong \"bé học bài\"?",
+  "emoji": "❓",
+  "prompt": "Bé dùng gì để ngửi hoa?",
+  "speech": "Con nghe câu hỏi nhé. Bé dùng gì để ngửi hoa?",
   "choices": [
-   "3",
-   "2",
-   "4"
+   "mũi",
+   "tai",
+   "mắt"
   ],
-  "answer": "3",
-  "hint": "Vỗ tay theo từng tiếng: bé - học - bài.",
-  "explanation": "\"Bé học bài\" có ba tiếng."
+  "visuals": {
+   "mũi": "👃",
+   "tai": "👂",
+   "mắt": "👁️"
+  },
+  "answer": "mũi",
+  "hint": "Bé ngửi thấy mùi thơm nhờ bộ phận nào?",
+  "explanation": "Bé ngửi bằng cái mũi."
  },
  {
   "id": "viet_029",
   "subject": "viet",
   "stage": "words",
   "type": "multiple_choice",
-  "emoji": "🔤",
-  "prompt": "Ghép b + à. Ta được tiếng nào?",
+  "emoji": "🐾",
+  "prompt": "Meo meo là tiếng kêu của con gì?",
+  "speech": "Con nghe nhé. Meo meo, meo meo. Đó là tiếng kêu của con gì?",
   "choices": [
-   "bà",
-   "bê",
-   "bú"
+   "mèo",
+   "chó",
+   "gà"
   ],
-  "answer": "bà",
-  "hint": "Đọc nối: bờ - à = bà.",
-  "explanation": "b ghép với à được \"bà\"."
+  "visuals": {
+   "mèo": "🐱",
+   "chó": "🐶",
+   "gà": "🐔"
+  },
+  "answer": "mèo",
+  "hint": "Con vật nào kêu meo meo?",
+  "explanation": "Meo meo là tiếng kêu của con mèo."
  },
  {
   "id": "viet_030",
   "subject": "viet",
   "stage": "words",
   "type": "multiple_choice",
-  "emoji": "🔠",
-  "prompt": "Chữ in hoa của chữ \"b\" là gì?",
+  "emoji": "👏",
+  "prompt": "Con mèo có mấy tiếng?",
+  "speech": "Con vỗ tay theo cô nhé. Con, mèo. Con mèo có mấy tiếng? Con chọn số nhé.",
   "choices": [
-   "B",
-   "D",
-   "P"
+   "2",
+   "1",
+   "3"
   ],
-  "answer": "B",
-  "hint": "Chữ B có hai cái bụng.",
-  "explanation": "Chữ in hoa của b là B."
+  "answer": "2",
+  "hint": "Vỗ tay theo nào. Con, mèo. Một, hai.",
+  "explanation": "Con, mèo. Con mèo có hai tiếng."
  }
 ]

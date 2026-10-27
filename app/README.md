@@ -33,6 +33,14 @@ npm run lint
 | `src/components/Doll.tsx` | Vẽ búp bê và đồ (vector tạm, thay bằng PNG layer sau này) |
 | `../assets-raw/ASSET_LOG.md` | Nguồn và license các asset đã tải |
 
+## Câu hỏi bằng giọng nói
+
+Bé lớp 1 chưa biết chữ nên mọi câu hỏi được **đọc to** (Web Speech API, giọng `vi-VN`) và câu Tiếng Việt có **đáp án là hình** (emoji).
+- Mỗi câu có `speech` (lời đọc) và `visuals` (hình cho từng đáp án) trong `src/data/questions.json`. Sửa nguồn ở `scripts/gen-questions.mjs`.
+- Khi trả lời sai/đúng, game cũng đọc to gợi ý/lời giải thích.
+- Giọng đọc phụ thuộc thiết bị: Edge/Windows có sẵn "Microsoft An"; Android và iOS thường có sẵn giọng tiếng Việt. Máy không có giọng sẽ hiện cảnh báo để người lớn đọc giúp.
+- Nút 🔊 / 🔇 chỉ tắt hiệu ứng âm thanh, **không** tắt giọng đọc câu hỏi.
+
 ## Cấu hình nhanh
 
 - Đổi tỷ lệ môn: `GAME_CONFIG.mathRatio` trong `src/data/config.ts`.

@@ -23,7 +23,11 @@ export interface Question {
   type: 'multiple_choice'
   emoji?: string
   prompt: string
+  /** What the voice says (first graders cannot read). Falls back to a spoken version of `prompt`. */
+  speech?: string
   choices: string[]
+  /** Picture for each choice (emoji), so children can answer without reading. */
+  visuals?: Record<string, string>
   answer: string
   hint: string
   explanation: string

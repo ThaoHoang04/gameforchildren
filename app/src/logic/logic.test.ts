@@ -6,6 +6,7 @@ import type { Question, Subject } from '../types'
 import { equip, sanitizeOutfit, unequip } from './outfit'
 import { emptyHistory, pickQuestion, recordPick } from './questionPicker'
 import { freshSave, parseSave } from './save'
+import { numberToVi, toSpeech } from './speech'
 
 const bank = questions as Question[]
 const opts = { ...GAME_CONFIG }
@@ -28,6 +29,29 @@ describe('question bank', () => {
       expect(q.hint.length).toBeGreaterThan(0)
     }
     expect(new Set(bank.map((q) => q.id)).size).toBe(bank.length)
+  })
+})
+
+describe('voice-first Vietnamese questions', () => {
+  const viet = bank.filter((q) => q.subject === 'viet')
+
+  it('every Vietnamese question is spoken, and picture answers cover every choice', () => {
+    for (const q of viet) {
+      expect(q.speech && q.speech.length > 10).toBe(true)
+      if (q.visuals) {
+        for (const c of q.choices) expect(q.visuals[c]).toBeTruthy()
+      }
+    }
+    // At most the counting question uses plain digits; everything else is pictures.
+    expect(viet.filter((q) => !q.visuals).length).toBeLessThanOrEqual(2)
+  })
+
+  it('numbers and symbols are turned into spoken Vietnamese', () => {
+    expect(numberToVi(15)).toBe('mười lăm')
+    expect(numberToVi(20)).toBe('hai mươi')
+    expect(toSpeech('5 + 3 = ?')).toBe('năm cộng ba bằng mấy')
+    expect(toSpeech('9 - 4 = ?')).toBe('chín trừ bốn bằng mấy')
+    expect(toSpeech('15 ... 12. Điền dấu thích hợp.')).toBe('mười lăm mười hai. Điền dấu thích hợp.')
   })
 })
 

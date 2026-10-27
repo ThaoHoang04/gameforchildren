@@ -1,3 +1,4 @@
+// Regenerates src/data/questions.json:  node scripts/gen-questions.mjs
 import fs from 'node:fs'
 const q = []
 const add = (subject, prefix) => (n, stage, emoji, prompt, ans, d, hint, explanation) =>
@@ -14,7 +15,6 @@ const add = (subject, prefix) => (n, stage, emoji, prompt, ans, d, hint, explana
     explanation,
   })
 const M = add('math', 'math')
-const V = add('viet', 'viet')
 const s5 = 'number_range_5', s10 = 'number_range_10', s20 = 'number_range_20'
 
 M(1, s5, '⭐', '1 + 1 = ?', '2', ['1', '3'], 'Có một ngôi sao, thêm một ngôi sao nữa.', 'Một cộng một bằng hai.')
@@ -48,36 +48,73 @@ M(28, s20, '⚖️', '13 ... 18. Điền dấu thích hợp.', '<', ['>', '='], 
 M(29, s20, '🧩', '11 + 9 = ?', '20', ['19', '21'], 'Từ 11 đếm tiếp 9 số, hoặc nhớ 1 + 9 = 10.', 'Mười một cộng chín bằng hai mươi.')
 M(30, s20, '🔢', '2, 4, 6, ... Số tiếp theo là?', '8', ['7', '9'], 'Các số tăng thêm 2 mỗi lần.', 'Sáu cộng hai bằng tám.')
 
-V(1, 'letters', '🐟', 'Chữ cái đầu của từ "cá" là gì?', 'c', ['b', 'd'], 'Đọc chậm: cờ - á.', 'Từ "cá" bắt đầu bằng chữ c.')
-V(2, 'letters', '🐱', 'Chữ cái đầu của từ "mèo" là gì?', 'm', ['n', 't'], 'Đọc chậm: mờ - èo.', 'Từ "mèo" bắt đầu bằng chữ m.')
-V(3, 'letters', '🐔', 'Chữ cái đầu của từ "gà" là gì?', 'g', ['d', 'q'], 'Đọc chậm: gờ - à.', 'Từ "gà" bắt đầu bằng chữ g.')
-V(4, 'letters', '🏠', 'Từ "nhà" bắt đầu bằng chữ ghép nào?', 'nh', ['ng', 'ch'], 'Đọc chậm: nhờ - à.', 'Từ "nhà" bắt đầu bằng nh.')
-V(5, 'letters', '🌙', 'Từ "trăng" bắt đầu bằng chữ ghép nào?', 'tr', ['ch', 'th'], 'Đọc chậm: trờ - ăng.', 'Từ "trăng" bắt đầu bằng tr.')
-V(6, 'letters', '🐘', 'Chữ cái đầu của từ "voi" là gì?', 'v', ['r', 'x'], 'Đọc chậm: vờ - oi.', 'Từ "voi" bắt đầu bằng chữ v.')
-V(7, 'letters', '🐶', 'Từ "chó" bắt đầu bằng chữ ghép nào?', 'ch', ['tr', 'kh'], 'Đọc chậm: chờ - ó.', 'Từ "chó" bắt đầu bằng ch.')
-V(8, 'letters', '🍎', 'Chữ cái đầu của từ "táo" là gì?', 't', ['đ', 'd'], 'Đọc chậm: tờ - áo.', 'Từ "táo" bắt đầu bằng chữ t.')
-V(9, 'letters', '🐰', 'Từ "thỏ" bắt đầu bằng chữ ghép nào?', 'th', ['tr', 'kh'], 'Đọc chậm: thờ - ỏ.', 'Từ "thỏ" bắt đầu bằng th.')
-V(10, 'letters', '⭐', 'Chữ cái đầu của từ "sao" là gì?', 's', ['x', 'c'], 'Đọc chậm: sờ - ao.', 'Từ "sao" bắt đầu bằng chữ s.')
-V(11, 'rhymes', '🪑', 'Tiếng nào có vần "an"?', 'bàn', ['bố', 'cá'], 'Đọc to: b-àn. Nghe thấy "an" ở cuối.', 'Tiếng "bàn" có vần an.')
-V(12, 'rhymes', '🐶', 'Tiếng nào có vần "on"?', 'con', ['bà', 'cô'], 'Đọc to: c-on. Nghe thấy "on" ở cuối.', 'Tiếng "con" có vần on.')
-V(13, 'rhymes', '⭐', 'Tiếng nào có vần "ao"?', 'sao', ['bé', 'đi'], 'Đọc to: s-ao. Nghe thấy "ao" ở cuối.', 'Tiếng "sao" có vần ao.')
-V(14, 'rhymes', '🎋', 'Tiếng nào có vần "ia"?', 'mía', ['mẹ', 'mũ'], 'Đọc to: m-ía. Nghe thấy "ia" ở cuối.', 'Tiếng "mía" có vần ia.')
-V(15, 'rhymes', '🌸', 'Tiếng nào có vần "oa"?', 'hoa', ['hồ', 'hè'], 'Đọc to: h-oa. Nghe thấy "oa" ở cuối.', 'Tiếng "hoa" có vần oa.')
-V(16, 'rhymes', '✌️', 'Tiếng nào có vần "ai"?', 'hai', ['hồ', 'hè'], 'Đọc to: h-ai. Nghe thấy "ai" ở cuối.', 'Tiếng "hai" có vần ai.')
-V(17, 'rhymes', '✋', 'Tiếng nào có vần "ay"?', 'tay', ['tơ', 'tư'], 'Đọc to: t-ay. Nghe thấy "ay" ở cuối.', 'Tiếng "tay" có vần ay.')
-V(18, 'rhymes', '🐱', 'Tiếng nào có vần "eo"?', 'mèo', ['bà', 'cá'], 'Đọc to: m-èo. Nghe thấy "eo" ở cuối.', 'Tiếng "mèo" có vần eo.')
-V(19, 'rhymes', '🍚', 'Tiếng nào có vần "ôi"?', 'xôi', ['bàn', 'sao'], 'Đọc to: x-ôi. Nghe thấy "ôi" ở cuối.', 'Tiếng "xôi" có vần ôi.')
-V(20, 'rhymes', '🐮', 'Tiếng nào có vần "ê"?', 'bê', ['bò', 'bà'], 'Đọc to: b-ê. Nghe thấy "ê" ở cuối.', 'Tiếng "bê" có vần ê.')
-V(21, 'words', '🐶', 'Từ nào chỉ con vật?', 'chó', ['bàn', 'ghế'], 'Con vật biết chạy, bay hoặc bơi.', '"Chó" là một con vật.')
-V(22, 'words', '🪑', 'Từ nào chỉ đồ vật?', 'ghế', ['mèo', 'gà'], 'Đồ vật là thứ ta dùng, không phải con vật.', '"Ghế" là đồ vật.')
-V(23, 'words', '🍎', 'Từ nào chỉ một loại quả?', 'táo', ['bàn', 'cá'], 'Quả là thứ ta ăn được, mọc trên cây.', '"Táo" là một loại quả.')
-V(24, 'words', '👴', 'Từ nào chỉ người thân trong gia đình?', 'ông', ['bút', 'vở'], 'Người thân là những người như bà, mẹ, bố...', '"Ông" là người thân.')
-V(25, 'words', '🎨', 'Từ nào chỉ màu sắc?', 'đỏ', ['mẹ', 'bé'], 'Màu sắc như xanh, vàng...', '"Đỏ" là màu sắc.')
-V(26, 'words', '📚', 'Bé ... bài. Chọn từ điền vào chỗ trống.', 'học', ['ngủ', 'ăn'], 'Bé làm gì với bài ở lớp?', '"Bé học bài" là câu đúng.')
-V(27, 'words', '🐱', 'Có mấy tiếng trong "con mèo"?', '2', ['1', '3'], 'Vỗ tay theo từng tiếng: con - mèo.', '"Con mèo" có hai tiếng.')
-V(28, 'words', '📖', 'Có mấy tiếng trong "bé học bài"?', '3', ['2', '4'], 'Vỗ tay theo từng tiếng: bé - học - bài.', '"Bé học bài" có ba tiếng.')
-V(29, 'words', '🔤', 'Ghép b + à. Ta được tiếng nào?', 'bà', ['bê', 'bú'], 'Đọc nối: bờ - à = bà.', 'b ghép với à được "bà".')
-V(30, 'words', '🔠', 'Chữ in hoa của chữ "b" là gì?', 'B', ['D', 'P'], 'Chữ B có hai cái bụng.', 'Chữ in hoa của b là B.')
+// ---------------------------------------------------------------------------
+// Vietnamese questions are voice-first: first graders cannot read yet, so the
+// prompt is spoken aloud (`speech`) and the choices are pictures (`visuals`).
+// `prompt` stays as small fallback text for parents / devices with no voice.
+// ---------------------------------------------------------------------------
+const PIC = {
+  cá: '🐟', mèo: '🐱', gà: '🐔', nhà: '🏠', trăng: '🌙', voi: '🐘', chó: '🐶', táo: '🍎', thỏ: '🐰',
+  sao: '⭐', bò: '🐮', hoa: '🌸', tay: '✋', tai: '👂', mũi: '👃', mắt: '👁️', ngựa: '🐴', chim: '🐦',
+  chuối: '🍌', nho: '🍇', dâu: '🍓', cam: '🍊', bút: '✏️', bóng: '⚽', kem: '🍦', xe: '🚗', heo: '🐷', vịt: '🦆',
+  miệng: '👄',
+}
+const pics = (words) => Object.fromEntries(words.map((w) => [w, PIC[w]]))
+
+const V = (n, stage, emoji, prompt, speech, ans, d, hint, explanation) => {
+  const choices = [ans, ...d]
+  const isWord = choices.every((c) => PIC[c])
+  q.push({
+    id: `viet_${String(n).padStart(3, '0')}`,
+    subject: 'viet',
+    stage,
+    type: 'multiple_choice',
+    emoji,
+    prompt,
+    speech,
+    choices,
+    ...(isWord ? { visuals: pics(choices) } : {}),
+    answer: ans,
+    hint,
+    explanation,
+  })
+}
+
+// Stage "letters": first sound of a word (listen, then pick the picture).
+V(1, 'letters', '👂', 'Tranh nào có tên bắt đầu bằng âm "c"?', 'Con nghe nhé. Cờ, cờ, cờ. Tranh nào có tên bắt đầu bằng âm cờ?', 'cá', ['mèo', 'gà'], 'Nghe thật kỹ nhé. Cờ, cờ, cá.', 'Cá. Cờ, cá. Con cá bắt đầu bằng âm cờ.')
+V(2, 'letters', '👂', 'Tranh nào có tên bắt đầu bằng âm "m"?', 'Con nghe nhé. Mờ, mờ, mờ. Tranh nào có tên bắt đầu bằng âm mờ?', 'mèo', ['cá', 'voi'], 'Nghe thật kỹ nhé. Mờ, mờ, mèo.', 'Mèo. Mờ, mèo. Con mèo bắt đầu bằng âm mờ.')
+V(3, 'letters', '👂', 'Tranh nào có tên bắt đầu bằng âm "g"?', 'Con nghe nhé. Gờ, gờ, gờ. Tranh nào có tên bắt đầu bằng âm gờ?', 'gà', ['mèo', 'thỏ'], 'Nghe thật kỹ nhé. Gờ, gờ, gà.', 'Gà. Gờ, gà. Con gà bắt đầu bằng âm gờ.')
+V(4, 'letters', '👂', 'Tranh nào có tên bắt đầu bằng âm "nh"?', 'Con nghe nhé. Nhờ, nhờ, nhờ. Tranh nào có tên bắt đầu bằng âm nhờ?', 'nhà', ['cá', 'bò'], 'Nghe thật kỹ nhé. Nhờ, nhờ, nhà.', 'Nhà. Nhờ, nhà. Ngôi nhà bắt đầu bằng âm nhờ.')
+V(5, 'letters', '👂', 'Tranh nào có tên bắt đầu bằng âm "tr"?', 'Con nghe nhé. Trờ, trờ, trờ. Tranh nào có tên bắt đầu bằng âm trờ?', 'trăng', ['cam', 'nho'], 'Nghe thật kỹ nhé. Trờ, trờ, trăng.', 'Trăng. Trờ, trăng. Mặt trăng bắt đầu bằng âm trờ.')
+V(6, 'letters', '👂', 'Tranh nào có tên bắt đầu bằng âm "v"?', 'Con nghe nhé. Vờ, vờ, vờ. Tranh nào có tên bắt đầu bằng âm vờ?', 'voi', ['cá', 'táo'], 'Nghe thật kỹ nhé. Vờ, vờ, voi.', 'Voi. Vờ, voi. Con voi bắt đầu bằng âm vờ.')
+V(7, 'letters', '👂', 'Tranh nào có tên bắt đầu bằng âm "ch"?', 'Con nghe nhé. Chờ, chờ, chờ. Tranh nào có tên bắt đầu bằng âm chờ?', 'chó', ['gà', 'cá'], 'Nghe thật kỹ nhé. Chờ, chờ, chó.', 'Chó. Chờ, chó. Con chó bắt đầu bằng âm chờ.')
+V(8, 'letters', '👂', 'Tranh nào có tên bắt đầu bằng âm "t"?', 'Con nghe nhé. Tờ, tờ, tờ. Tranh nào có tên bắt đầu bằng âm tờ?', 'táo', ['mèo', 'nhà'], 'Nghe thật kỹ nhé. Tờ, tờ, táo.', 'Táo. Tờ, táo. Quả táo bắt đầu bằng âm tờ.')
+V(9, 'letters', '👂', 'Tranh nào có tên bắt đầu bằng âm "th"?', 'Con nghe nhé. Thờ, thờ, thờ. Tranh nào có tên bắt đầu bằng âm thờ?', 'thỏ', ['voi', 'gà'], 'Nghe thật kỹ nhé. Thờ, thờ, thỏ.', 'Thỏ. Thờ, thỏ. Con thỏ bắt đầu bằng âm thờ.')
+V(10, 'letters', '👂', 'Tranh nào có tên bắt đầu bằng âm "s"?', 'Con nghe nhé. Sờ, sờ, sờ. Tranh nào có tên bắt đầu bằng âm sờ?', 'sao', ['mèo', 'nhà'], 'Nghe thật kỹ nhé. Sờ, sờ, sao.', 'Sao. Sờ, sao. Ngôi sao bắt đầu bằng âm sờ.')
+
+// Stage "rhymes": which word has the same ending sound (vần).
+V(11, 'rhymes', '🎵', 'Tranh nào có vần "ao"?', 'Con nghe nhé. Vần ao. Tranh nào có vần ao?', 'sao', ['cá', 'nhà'], 'Nghe thật kỹ phần cuối nhé. S, ao. Sao.', 'Sao. Sao có vần ao.')
+V(12, 'rhymes', '🎵', 'Tranh nào có vần "eo"?', 'Con nghe nhé. Vần eo. Tranh nào có vần eo?', 'mèo', ['sao', 'cá'], 'Nghe thật kỹ phần cuối nhé. M, eo. Mèo.', 'Mèo. Mèo có vần eo.')
+V(13, 'rhymes', '🎵', 'Tranh nào có vần "oa"?', 'Con nghe nhé. Vần oa. Tranh nào có vần oa?', 'hoa', ['cá', 'sao'], 'Nghe thật kỹ phần cuối nhé. H, oa. Hoa.', 'Hoa. Hoa có vần oa.')
+V(14, 'rhymes', '🎵', 'Tranh nào có vần "ay"?', 'Con nghe nhé. Vần ay. Tranh nào có vần ay?', 'tay', ['mèo', 'sao'], 'Nghe thật kỹ phần cuối nhé. T, ay. Tay.', 'Tay. Tay có vần ay.')
+V(15, 'rhymes', '🎵', 'Tranh nào có vần "ai"?', 'Con nghe nhé. Vần ai. Tranh nào có vần ai?', 'tai', ['sao', 'cá'], 'Nghe thật kỹ phần cuối nhé. T, ai. Tai.', 'Tai. Tai có vần ai.')
+V(16, 'rhymes', '🎵', 'Tranh nào có vần "ui"?', 'Con nghe nhé. Vần ui. Tranh nào có vần ui?', 'mũi', ['mèo', 'sao'], 'Nghe thật kỹ phần cuối nhé. M, ui. Mũi.', 'Mũi. Mũi có vần ui.')
+V(17, 'rhymes', '🎵', 'Tranh nào có vần "ưa"?', 'Con nghe nhé. Vần ưa. Tranh nào có vần ưa?', 'ngựa', ['cá', 'mèo'], 'Nghe thật kỹ phần cuối nhé. Ng, ưa. Ngựa.', 'Ngựa. Ngựa có vần ưa.')
+V(18, 'rhymes', '🎵', 'Tranh nào có vần "oi"?', 'Con nghe nhé. Vần oi. Tranh nào có vần oi?', 'voi', ['mèo', 'sao'], 'Nghe thật kỹ phần cuối nhé. V, oi. Voi.', 'Voi. Voi có vần oi.')
+V(19, 'rhymes', '🎵', 'Tranh nào có vần "im"?', 'Con nghe nhé. Vần im. Tranh nào có vần im?', 'chim', ['cá', 'sao'], 'Nghe thật kỹ phần cuối nhé. Ch, im. Chim.', 'Chim. Chim có vần im.')
+V(20, 'rhymes', '🎵', 'Tranh nào có vần "a"?', 'Con nghe nhé. Vần a. Tranh nào có vần a?', 'cá', ['sao', 'mèo'], 'Nghe thật kỹ phần cuối nhé. C, a. Cá.', 'Cá. Cá có vần a.')
+
+// Stage "words": meaning of words and everyday things (listen, pick a picture).
+V(21, 'words', '❓', 'Con vật nào biết bay?', 'Con nghe câu hỏi nhé. Con vật nào biết bay?', 'chim', ['chó', 'cá'], 'Con vật nào có cánh để bay trên trời?', 'Chim biết bay trên trời.')
+V(22, 'words', '❓', 'Con vật nào sống dưới nước?', 'Con nghe câu hỏi nhé. Con vật nào sống ở dưới nước?', 'cá', ['gà', 'mèo'], 'Con vật nào biết bơi trong nước?', 'Cá sống dưới nước.')
+V(23, 'words', '❓', 'Quả nào có màu vàng?', 'Con nghe câu hỏi nhé. Quả nào có màu vàng?', 'chuối', ['dâu', 'nho'], 'Quả chuối chín có màu gì nhỉ?', 'Quả chuối chín có màu vàng.')
+V(24, 'words', '❓', 'Đâu là quả có màu đỏ?', 'Con nghe câu hỏi nhé. Quả nào có màu đỏ?', 'dâu', ['chuối', 'nho'], 'Quả dâu tây chín có màu gì nhỉ?', 'Quả dâu chín có màu đỏ.')
+V(25, 'words', '❓', 'Bé dùng gì để viết?', 'Con nghe câu hỏi nhé. Bé dùng gì để viết chữ?', 'bút', ['bóng', 'kem'], 'Bé cầm vật gì để viết chữ?', 'Bé dùng cây bút để viết.')
+V(26, 'words', '❓', 'Bé dùng gì để nghe?', 'Con nghe câu hỏi nhé. Bé dùng gì để nghe âm thanh?', 'tai', ['mắt', 'mũi'], 'Bé nghe được là nhờ bộ phận nào?', 'Bé nghe bằng đôi tai.')
+V(27, 'words', '❓', 'Bé dùng gì để nhìn?', 'Con nghe câu hỏi nhé. Bé dùng gì để nhìn?', 'mắt', ['tai', 'miệng'], 'Bé nhìn thấy mọi thứ nhờ bộ phận nào?', 'Bé nhìn bằng đôi mắt.')
+V(28, 'words', '❓', 'Bé dùng gì để ngửi hoa?', 'Con nghe câu hỏi nhé. Bé dùng gì để ngửi hoa?', 'mũi', ['tai', 'mắt'], 'Bé ngửi thấy mùi thơm nhờ bộ phận nào?', 'Bé ngửi bằng cái mũi.')
+V(29, 'words', '🐾', 'Meo meo là tiếng kêu của con gì?', 'Con nghe nhé. Meo meo, meo meo. Đó là tiếng kêu của con gì?', 'mèo', ['chó', 'gà'], 'Con vật nào kêu meo meo?', 'Meo meo là tiếng kêu của con mèo.')
+V(30, 'words', '👏', 'Con mèo có mấy tiếng?', 'Con vỗ tay theo cô nhé. Con, mèo. Con mèo có mấy tiếng? Con chọn số nhé.', '2', ['1', '3'], 'Vỗ tay theo nào. Con, mèo. Một, hai.', 'Con, mèo. Con mèo có hai tiếng.')
 
 fs.writeFileSync(new URL('../src/data/questions.json', import.meta.url), JSON.stringify(q, null, 1))
 console.log(q.length)

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { shuffle } from '../logic/questionPicker'
 import { play } from '../logic/sound'
+import { hasVietnameseVoice, speak, stopSpeaking, toSpeech } from '../logic/speech'
 import type { Item, Question } from '../types'
 import { ItemThumb } from './Doll'
 
@@ -15,7 +16,22 @@ export function QuestionModal({ question, item, onCorrect, onClose }: Props) {
   const choices = useMemo(() => shuffle(question.choices), [question])
   const [wrong, setWrong] = useState<string[]>([])
   const [solved, setSolved] = useState(false)
+  const [voiceOk, setVoiceOk] = useState(true)
   const firstBtn = useRef<HTMLButtonElement>(null)
+  const spoken = question.speech ?? toSpeech(question.prompt)
+  const pictures = question.visuals
+
+  // Read the question aloud when it opens; stop when it closes.
+  useEffect(() => {
+    let live = true
+    void hasVietnameseVoice().then((ok) => live && setVoiceOk(ok))
+    const t = setTimeout(() => speak(spoken), 450)
+    return () => {
+      live = false
+      clearTimeout(t)
+      stopSpeaking()
+    }
+  }, [spoken])
 
   useEffect(() => {
     firstBtn.current?.focus()
@@ -30,9 +46,11 @@ export function QuestionModal({ question, item, onCorrect, onClose }: Props) {
       setSolved(true)
       play('correct')
       onCorrect()
+      setTimeout(() => speak(`Đúng rồi! Giỏi quá! ${toSpeech(question.explanation)}`), 500)
     } else {
       play('wrong')
       setWrong((w) => [...w, c])
+      setTimeout(() => speak(`Chưa đúng rồi. Con thử lại nhé. ${toSpeech(question.hint)}`), 350)
     }
   }
 
@@ -58,12 +76,21 @@ export function QuestionModal({ question, item, onCorrect, onClose }: Props) {
             ))}
           </div>
         )}
-        {question.emoji && <div className="q-emoji" aria-hidden="true">{question.emoji}</div>}
-        <h2 id="q-prompt" className="q-prompt" data-testid="q-prompt">
+        {question.emoji && (
+          <div className="q-emoji" aria-hidden="true">
+            {question.emoji}
+          </div>
+        )}
+
+        <button className="speaker" onClick={() => speak(spoken)} aria-label="Nghe lại câu hỏi" data-testid="speaker">
+          <span aria-hidden="true">🔊</span> Nghe lại
+        </button>
+
+        <h2 id="q-prompt" className={`q-prompt${pictures ? ' q-prompt-small' : ''}`} data-testid="q-prompt">
           {question.prompt}
         </h2>
 
-        <div className="choices">
+        <div className={`choices${pictures ? ' choices-pic' : ''}`}>
           {choices.map((c, i) => {
             const isWrong = wrong.includes(c)
             const isRight = solved && c === question.answer
@@ -71,14 +98,29 @@ export function QuestionModal({ question, item, onCorrect, onClose }: Props) {
               <button
                 key={c}
                 ref={i === 0 ? firstBtn : undefined}
-                className={`choice${isWrong ? ' choice-wrong' : ''}${isRight ? ' choice-right' : ''}`}
+                className={`choice${pictures ? ' choice-pic' : ''}${isWrong ? ' choice-wrong' : ''}${isRight ? ' choice-right' : ''}`}
                 disabled={isWrong || solved}
                 aria-label={isWrong ? `${c} – chưa đúng` : isRight ? `${c} – đúng rồi` : c}
                 onClick={() => answer(c)}
               >
-                {isWrong && <span aria-hidden="true">✗ </span>}
-                {isRight && <span aria-hidden="true">✓ </span>}
-                {c}
+                {pictures ? (
+                  <>
+                    <span className="pic" aria-hidden="true">
+                      {pictures[c] ?? c}
+                    </span>
+                    <span className="pic-label" aria-hidden="true">
+                      {isWrong && '✗ '}
+                      {isRight && '✓ '}
+                      {c}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    {isWrong && <span aria-hidden="true">✗ </span>}
+                    {isRight && <span aria-hidden="true">✓ </span>}
+                    {c}
+                  </>
+                )}
               </button>
             )
           })}
@@ -95,7 +137,12 @@ export function QuestionModal({ question, item, onCorrect, onClose }: Props) {
               💡 Gợi ý: {question.hint}
             </p>
           ) : (
-            <p className="fb-hint">Trả lời đúng để mở khóa món đồ này nhé!</p>
+            <p className="fb-hint">Nghe câu hỏi rồi chọn đáp án đúng để mở khóa nhé!</p>
+          )}
+          {!voiceOk && (
+            <p className="fb-warn" data-testid="no-voice">
+              🔇 Máy chưa có giọng đọc tiếng Việt, nhờ người lớn đọc câu hỏi giúp bé nhé.
+            </p>
           )}
         </div>
 
