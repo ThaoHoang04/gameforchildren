@@ -32,6 +32,7 @@ const ROWS: Record<ThemeId, Row[]> = {
     ['eyeshadow', 'shimmer', 'Phấn mắt tím lấp lánh', '#b57edc'],
     ['sticker', 'star', 'Hình dán ngôi sao', '#ffd447'],
     ['sticker', 'crown', 'Hình dán vương miện', '#ffcf3f'],
+    ['shoes', 'ballet', 'Giày búp bê ruy băng', '#ffc2dc'],
   ],
   fashion: [
     ['hair', 'bob', 'Tóc bob đen', '#2f2a35', { starter: true }],
@@ -63,6 +64,7 @@ const ROWS: Record<ThemeId, Row[]> = {
     ['blush', 'round', 'Má hồng đào', '#ff9a7a'],
     ['eyeshadow', 'soft', 'Phấn mắt nâu', '#c48a6a'],
     ['sticker', 'heart', 'Hình dán trái tim', '#ff5f9d'],
+    ['shoes', 'maryjane', 'Giày búp bê quai đen', '#3a3340'],
   ],
   chibi: [
     ['hair', 'pigtails', 'Hai bím hồng', '#ff8fc0', { starter: true }],
@@ -92,6 +94,7 @@ const ROWS: Record<ThemeId, Row[]> = {
     ['blush', 'hearts', 'Má trái tim xanh', '#6cc8f5'],
     ['eyeshadow', 'shimmer', 'Phấn mắt xanh lấp lánh', '#6cc8f5'],
     ['lips', 'gloss', 'Son bóng tím', '#b06ae0'],
+    ['shoes', 'maryjane', 'Giày quai kẹo', '#ff8fc0'],
   ],
 }
 

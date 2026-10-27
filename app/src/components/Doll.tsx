@@ -320,25 +320,107 @@ function layersFor(item: Item): Layer[] {
       ]
     }
     case 'shoes': {
-      const body =
-        item.shape === 'sneakers' ? (
-          <>
-            <ellipse cx="88" cy="270" rx="19" ry="10" fill={fill} stroke={line} strokeWidth="2.2" />
-            <ellipse cx="112" cy="270" rx="19" ry="10" fill={fill} stroke={line} strokeWidth="2.2" />
-            <path d="M70 274 H106 M94 274 H130" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
-          </>
-        ) : item.shape === 'boots' ? (
-          <>
-            <path d="M78 238 L97 238 L99 272 L72 276 L72 262 L78 262 Z" fill={fill} stroke={line} strokeWidth="2.2" strokeLinejoin="round" />
-            <path d="M122 238 L103 238 L101 272 L128 276 L128 262 L122 262 Z" fill={fill} stroke={line} strokeWidth="2.2" strokeLinejoin="round" />
-          </>
-        ) : (
-          <>
-            <path d="M78 262 L98 262 L98 274 L70 276 Z" fill={fill} stroke={line} strokeWidth="2.2" strokeLinejoin="round" />
-            <path d="M122 262 L102 262 L102 274 L130 276 Z" fill={fill} stroke={line} strokeWidth="2.2" strokeLinejoin="round" />
-          </>
-        )
-      return [[3, <g key="s">{defs}{body}</g>]]
+      const stroke = { stroke: line, strokeWidth: 2.2, strokeLinejoin: 'round' as const }
+      const sole = (cx: number, color: string, h = 5) => (
+        <path
+          d={`M${cx - 14} 276 Q${cx - 15} ${276 + h} ${cx - 6} ${276 + h} L${cx + 6} ${276 + h} Q${cx + 15} ${276 + h} ${cx + 14} 276 Z`}
+          fill={color}
+          {...stroke}
+        />
+      )
+      const foot = (cx: number, side: 1 | -1) => {
+        switch (item.shape) {
+          case 'sneakers':
+            return (
+              <g key={cx}>
+                {sole(cx, '#fff', 6)}
+                <path
+                  d={`M${cx - 10} 250 L${cx + 10} 250 Q${cx + 12} 262 ${cx + 13} 270 Q${cx + 14} 278 ${cx + 5} 278 L${cx - 5} 278 Q${cx - 14} 278 ${cx - 13} 270 Q${cx - 12} 262 ${cx - 10} 250 Z`}
+                  fill={fill}
+                  {...stroke}
+                />
+                <ellipse cx={cx} cy="272" rx="9" ry="5.5" fill="#fff" fillOpacity=".5" />
+                <rect x={cx - 6} y="246" width="12" height="8" rx="3" fill={lighten(c, 0.45)} {...stroke} strokeWidth={1.6} />
+                <path d={`M${cx - 5} 258 H${cx + 5} M${cx - 5} 263 H${cx + 5} M${cx - 5} 268 H${cx + 5}`} stroke="#fff" strokeWidth="2.2" strokeLinecap="round" />
+                <path d={`M${cx - 9} 275 Q${cx} 279 ${cx + 9} 275`} stroke={line} strokeOpacity=".35" strokeWidth="1.5" fill="none" />
+              </g>
+            )
+          case 'boots':
+            return (
+              <g key={cx}>
+                {sole(cx, darken(c, 0.55), 6)}
+                <path
+                  d={`M${cx - 11} 234 L${cx + 11} 234 L${cx + 12} 266 Q${cx + 15} 278 ${cx + 5} 278 L${cx - 5} 278 Q${cx - 15} 278 ${cx - 12} 266 Z`}
+                  fill={fill}
+                  {...stroke}
+                />
+                <path d={`M${cx - 11.5} 234 L${cx + 11.5} 234 L${cx + 11.5} 244 L${cx - 11.5} 244 Z`} fill={lighten(c, 0.4)} {...stroke} strokeWidth={1.8} />
+                <path d={`M${cx - 9} 238 H${cx + 9}`} stroke="#fff" strokeOpacity=".6" strokeWidth="2" strokeLinecap="round" strokeDasharray="3 3" />
+                <path d={`M${cx - 12} 258 H${cx + 12}`} stroke={darken(c, 0.35)} strokeWidth="3.4" />
+                <rect x={cx - 3.5} y="254" width="7" height="8" rx="2" fill="#ffd447" stroke={line} strokeWidth="1.4" />
+                <ellipse cx={cx} cy="272" rx="8" ry="4.5" fill="#fff" fillOpacity=".25" />
+              </g>
+            )
+          case 'ballet':
+            return (
+              <g key={cx}>
+                {sole(cx, darken(c, 0.3), 3)}
+                <path
+                  d={`M${cx - 11} 262 Q${cx} 255 ${cx + 11} 262 L${cx + 13} 272 Q${cx + 14} 279 ${cx + 5} 279 L${cx - 5} 279 Q${cx - 14} 279 ${cx - 13} 272 Z`}
+                  fill={fill}
+                  {...stroke}
+                />
+                {/* ankle ribbons */}
+                <path d={`M${cx - 9} 252 L${cx + side * 5} 266 M${cx + 9} 252 L${cx - side * 5} 266`} stroke={lighten(c, 0.5)} strokeWidth="3" strokeLinecap="round" />
+                <path d={`M${cx - 9} 252 L${cx + side * 5} 266 M${cx + 9} 252 L${cx - side * 5} 266`} stroke={line} strokeOpacity=".3" strokeWidth="1" strokeLinecap="round" />
+                {/* toe bow */}
+                <path d={`M${cx} 270 L${cx - 7} 266 L${cx - 7} 274 Z M${cx} 270 L${cx + 7} 266 L${cx + 7} 274 Z`} fill={lighten(c, 0.55)} stroke={line} strokeWidth="1.4" strokeLinejoin="round" />
+                <circle cx={cx} cy="270" r="2.6" fill={lighten(c, 0.55)} stroke={line} strokeWidth="1.4" />
+              </g>
+            )
+          case 'maryjane':
+            return (
+              <g key={cx}>
+                <rect x={cx - 3.5} y="278" width="7" height="5" rx="1.5" fill={darken(c, 0.4)} stroke={line} strokeWidth="1.6" />
+                {sole(cx, darken(c, 0.4), 3)}
+                <path
+                  d={`M${cx - 11} 258 Q${cx} 251 ${cx + 11} 258 L${cx + 13} 270 Q${cx + 14} 279 ${cx + 5} 279 L${cx - 5} 279 Q${cx - 14} 279 ${cx - 13} 270 Z`}
+                  fill={fill}
+                  {...stroke}
+                />
+                <path d={`M${cx - 12} 263 H${cx + 12}`} stroke={darken(c, 0.3)} strokeWidth="4" strokeLinecap="round" />
+                <circle cx={cx + side * 9} cy="263" r="3" fill="#ffd447" stroke={line} strokeWidth="1.4" />
+                <path d={`M${cx - 7} 268 Q${cx - 3} 265 ${cx + 1} 266`} stroke="#fff" strokeOpacity=".5" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+              </g>
+            )
+          default:
+            // heels (pumps with an ankle strap)
+            return (
+              <g key={cx}>
+                <rect x={cx - 3} y="277" width="6" height="8" rx="2" fill={darken(c, 0.35)} stroke={line} strokeWidth="1.6" />
+                <path
+                  d={`M${cx - 10} 256 Q${cx} 250 ${cx + 10} 256 L${cx + 12} 268 Q${cx + 13} 278 ${cx + 4} 278 L${cx - 4} 278 Q${cx - 13} 278 ${cx - 12} 268 Z`}
+                  fill={fill}
+                  {...stroke}
+                />
+                <path d={`M${cx - 11} 259 H${cx + 11}`} stroke={darken(c, 0.25)} strokeWidth="3" strokeLinecap="round" />
+                <circle cx={cx} cy="259" r="2.6" fill="#fff" stroke={line} strokeWidth="1.2" />
+                <path d={sparkle(cx + side * 3, 270, 4.5)} fill="#fff" fillOpacity=".9" />
+                <ellipse cx={cx - side * 4} cy="268" rx="3" ry="6" fill="#fff" fillOpacity=".3" />
+              </g>
+            )
+        }
+      }
+      return [
+        [
+          3,
+          <g key="s">
+            {defs}
+            {foot(88, -1)}
+            {foot(112, 1)}
+          </g>,
+        ],
+      ]
     }
     case 'head': {
       const m: Record<string, ReactNode> = {
@@ -615,7 +697,7 @@ const CROP: Record<Slot, string> = {
   top: '40 130 120 100',
   bottom: '30 196 140 90',
   dress: '20 134 160 150',
-  shoes: '50 232 100 60',
+  shoes: '58 228 84 62',
   back: '0 110 200 130',
   lips: '40 46 120 110',
   blush: '40 46 120 110',
